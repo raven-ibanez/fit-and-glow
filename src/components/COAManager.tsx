@@ -62,22 +62,53 @@ const COAManager: React.FC = () => {
 
   const toggleCOAPage = async (enabled: boolean) => {
     try {
-      const { error } = await supabase
+      // First, check if the setting exists
+      const { data: existing, error: checkError } = await supabase
         .from('site_settings')
-        .upsert({
-          id: 'coa_page_enabled',
-          value: enabled ? 'true' : 'false',
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'id'
-        });
+        .select('id')
+        .eq('id', 'coa_page_enabled')
+        .single();
 
-      if (error) throw error;
+      let error;
+      
+      if (checkError && checkError.code === 'PGRST116') {
+        // Setting doesn't exist, insert it
+        const { error: insertError } = await supabase
+          .from('site_settings')
+          .insert({
+            id: 'coa_page_enabled',
+            value: enabled ? 'true' : 'false',
+            type: 'boolean',
+            description: 'Enable or disable the COA page on the website',
+            updated_at: new Date().toISOString()
+          });
+        error = insertError;
+      } else if (checkError) {
+        // Some other error checking
+        throw checkError;
+      } else {
+        // Setting exists, update it
+        const { error: updateError } = await supabase
+          .from('site_settings')
+          .update({
+            value: enabled ? 'true' : 'false',
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', 'coa_page_enabled');
+        error = updateError;
+      }
+
+      if (error) {
+        console.error('Error updating COA page setting:', error);
+        throw error;
+      }
+      
       setCoaPageEnabled(enabled);
       alert(enabled ? '✅ COA page is now visible on the website' : '❌ COA page is now hidden from the website');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error updating COA page setting:', error);
-      alert('❌ Failed to update COA page setting');
+      const errorMessage = error?.message || 'Unknown error';
+      alert(`❌ Failed to update COA page setting: ${errorMessage}\n\nThis might be a permissions issue. Please check your database RLS policies.`);
     }
   };
 

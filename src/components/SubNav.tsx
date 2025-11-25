@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, FlaskConical, Sparkles, Dumbbell, Heart, Brain } from 'lucide-react';
+import { Grid, FlaskConical, Sparkles, Leaf, Package } from 'lucide-react';
 import { useCategories } from '../hooks/useCategories';
 
 interface SubNavProps {
@@ -11,23 +11,17 @@ const iconMap: { [key: string]: React.ReactElement } = {
   Grid: <Grid className="w-5 h-5" />,
   FlaskConical: <FlaskConical className="w-5 h-5" />,
   Sparkles: <Sparkles className="w-5 h-5" />,
-  Dumbbell: <Dumbbell className="w-5 h-5" />,
-  Heart: <Heart className="w-5 h-5" />,
-  Brain: <Brain className="w-5 h-5" />,
+  Leaf: <Leaf className="w-5 h-5" />,
+  Package: <Package className="w-5 h-5" />,
 };
 
-// Professional gradient colors for each category
+// Professional gradient colors for peptide categories only
 const categoryColors: { [key: string]: string } = {
   all: 'from-blue-500 to-blue-700',
-  'weight-management': 'from-blue-400 to-blue-600',
-  'anti-aging': 'from-indigo-400 to-indigo-600',
-  recovery: 'from-sky-400 to-sky-600',
-  wellness: 'from-cyan-400 to-cyan-600',
   research: 'from-blue-400 to-blue-600',
   cosmetic: 'from-indigo-400 to-indigo-600',
-  performance: 'from-sky-400 to-sky-600',
-  healing: 'from-cyan-400 to-cyan-600',
-  cognitive: 'from-blue-500 to-blue-700',
+  wellness: 'from-cyan-400 to-cyan-600',
+  supplies: 'from-purple-400 to-purple-600',
 };
 
 const SubNav: React.FC<SubNavProps> = ({ selectedCategory, onCategoryClick }) => {

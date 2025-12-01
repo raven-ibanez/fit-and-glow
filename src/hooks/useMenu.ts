@@ -43,17 +43,49 @@ export function useMenu() {
       });
 
     // Refetch data when window regains focus (user switches back from admin)
+    // But only if we're not on the admin page to avoid interfering with forms
+    let focusRefreshTimeout: ReturnType<typeof setTimeout> | null = null;
     const handleFocus = () => {
-      console.log('👁️ Window focused - refreshing products...');
-      fetchProducts();
+      // Check if we're on admin page - if so, don't refresh
+      const isAdminPage = window.location.pathname === '/admin';
+      if (isAdminPage) {
+        console.log('👁️ Window focused on admin page - skipping refresh to avoid form interference');
+        return;
+      }
+
+      // Debounce focus refresh to avoid too frequent refreshes
+      if (focusRefreshTimeout) {
+        clearTimeout(focusRefreshTimeout);
+      }
+      
+      focusRefreshTimeout = setTimeout(() => {
+        console.log('👁️ Window focused - refreshing products...');
+        fetchProducts();
+        focusRefreshTimeout = null;
+      }, 1000); // Wait 1 second before refreshing
     };
 
     // Also add visibility change handler for better cross-tab updates
+    // But skip if on admin page
     const handleVisibilityChange = () => {
-      if (!document.hidden) {
+      if (document.hidden) return;
+      
+      const isAdminPage = window.location.pathname === '/admin';
+      if (isAdminPage) {
+        console.log('👁️ Tab became visible on admin page - skipping refresh');
+        return;
+      }
+
+      // Debounce visibility refresh
+      if (focusRefreshTimeout) {
+        clearTimeout(focusRefreshTimeout);
+      }
+      
+      focusRefreshTimeout = setTimeout(() => {
         console.log('👁️ Tab became visible - refreshing products...');
         fetchProducts();
-      }
+        focusRefreshTimeout = null;
+      }, 1000);
     };
 
     window.addEventListener('focus', handleFocus);
@@ -64,6 +96,9 @@ export function useMenu() {
       supabase.removeChannel(productsChannel);
       window.removeEventListener('focus', handleFocus);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (focusRefreshTimeout) {
+        clearTimeout(focusRefreshTimeout);
+      }
     };
   }, []);
 

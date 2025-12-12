@@ -7,54 +7,54 @@ import { useCart } from '../hooks/useCart';
 const PeptideCalculator: React.FC = () => {
     const [vialQuantityMg, setVialQuantityMg] = useState<number | ''>('');
     const [waterAddedMl, setWaterAddedMl] = useState<number | ''>('');
-    const [desiredDoseMcg, setDesiredDoseMcg] = useState<number | ''>('');
+    const [desiredDoseMg, setDesiredDoseMg] = useState<number | ''>('');
 
     const [resultUnits, setResultUnits] = useState<number | null>(null);
-    const [resultMcgPerUnit, setResultMcgPerUnit] = useState<number | null>(null);
+    const [resultMgPerUnit, setResultMgPerUnit] = useState<number | null>(null);
 
     const cart = useCart();
 
     useEffect(() => {
         calculate();
-    }, [vialQuantityMg, waterAddedMl, desiredDoseMcg]);
+    }, [vialQuantityMg, waterAddedMl, desiredDoseMg]);
 
     const calculate = () => {
-        if (vialQuantityMg && waterAddedMl && desiredDoseMcg) {
+        if (vialQuantityMg && waterAddedMl && desiredDoseMg) {
             // 1. Calculate concentration (mg/ml)
             const concentrationMgPerMl = Number(vialQuantityMg) / Number(waterAddedMl);
 
-            // 2. Convert desired dose to mg
-            const desiredDoseMg = Number(desiredDoseMcg) / 1000;
+            // 2. Dose is already in mg
+            const doseMg = Number(desiredDoseMg);
 
             // 3. Calculate volume to inject (ml)
-            const volumeToInjectMl = desiredDoseMg / concentrationMgPerMl;
+            const volumeToInjectMl = doseMg / concentrationMgPerMl;
 
             // 4. Convert to Units (U-100 syringe)
             // 1ml = 100 units
             const units = volumeToInjectMl * 100;
 
-            // Calculate mcg per unit (tick mark)
-            // Total mg in vial * 1000 = Total mcg
+            // Calculate mg per unit (tick mark)
+            // Total mg in vial
             // Total units in vial = water (ml) * 100
-            // mcg per unit = Total mcg / Total units
-            const totalMcg = Number(vialQuantityMg) * 1000;
+            // mg per unit = Total mg / Total units
+            const totalMg = Number(vialQuantityMg);
             const totalUnits = Number(waterAddedMl) * 100;
-            const mcgPerUnit = totalMcg / totalUnits;
+            const mgPerUnit = totalMg / totalUnits;
 
             setResultUnits(Number(units.toFixed(1)));
-            setResultMcgPerUnit(Number(mcgPerUnit.toFixed(1)));
+            setResultMgPerUnit(Number(mgPerUnit.toFixed(4))); // 4 decimal places for mg accuracy
         } else {
             setResultUnits(null);
-            setResultMcgPerUnit(null);
+            setResultMgPerUnit(null);
         }
     };
 
     const handleReset = () => {
         setVialQuantityMg('');
         setWaterAddedMl('');
-        setDesiredDoseMcg('');
+        setDesiredDoseMg('');
         setResultUnits(null);
-        setResultMcgPerUnit(null);
+        setResultMgPerUnit(null);
     };
 
     return (
@@ -140,16 +140,16 @@ const PeptideCalculator: React.FC = () => {
                                     <div className="relative">
                                         <input
                                             type="number"
-                                            value={desiredDoseMcg}
-                                            onChange={(e) => setDesiredDoseMcg(Number(e.target.value))}
-                                            placeholder="e.g. 250, 500"
+                                            value={desiredDoseMg}
+                                            onChange={(e) => setDesiredDoseMg(Number(e.target.value))}
+                                            placeholder="e.g. 0.25, 0.5"
                                             className="w-full pl-4 pr-12 py-3 border border-gray-200 rounded-lg focus:ring-1 focus:ring-navy-900 focus:border-navy-900 transition-all outline-none"
                                         />
                                         <div className="absolute inset-y-0 right-0 flex items-center px-4 bg-gray-50 border-l border-gray-200 rounded-r-lg text-gray-500 text-sm font-medium">
-                                            mcg
+                                            mg
                                         </div>
                                     </div>
-                                    <p className="text-xs text-gray-400">The dose you want to administer (micrograms).</p>
+                                    <p className="text-xs text-gray-400">The dose you want to administer (milligrams).</p>
                                 </div>
 
                                 {/* Reset Button */}
@@ -193,11 +193,11 @@ const PeptideCalculator: React.FC = () => {
                                             </div>
                                             <div className="flex justify-between items-center text-sm">
                                                 <span className="text-gray-500">Total Concentration</span>
-                                                <span className="font-semibold text-gray-900">{resultMcgPerUnit && resultMcgPerUnit * 10} mcg/unit</span>
+                                                <span className="font-semibold text-gray-900">{resultMgPerUnit && (resultMgPerUnit * 10).toFixed(2)} mg/ml</span>
                                             </div>
                                             <div className="flex justify-between items-center text-sm pt-2 border-t border-gray-200">
                                                 <span className="text-gray-500 font-medium">Each Tick Mark (1 Unit)</span>
-                                                <span className="font-bold text-gold-600">{resultMcgPerUnit} mcg</span>
+                                                <span className="font-bold text-gold-600">{resultMgPerUnit} mg</span>
                                             </div>
                                         </div>
                                     </>

@@ -16,24 +16,16 @@ const Footer: React.FC = () => {
             <div className="w-12 h-12 rounded-xl overflow-hidden border border-white/20 shadow-glow">
               <img
                 src="/assets/logo.jpg"
-                alt="Peptide Pulse"
+                alt="X Peptide"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="text-left">
               <div className="font-black text-white text-xl tracking-tight">
-                PEPTIDE PULSE
+                X PEPTIDE
               </div>
               <div className="text-xs text-gray-500">Premium Research Peptides</div>
             </div>
-          </div>
-
-          {/* Contact Emails */}
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-gray-500">
-            <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">Contact:</span>
-            <a href="mailto:thepeptidepulse@gmail.com" className="hover:text-white transition-colors">
-              thepeptidepulse@gmail.com
-            </a>
           </div>
 
           {/* Quick Links */}
@@ -80,7 +72,7 @@ const Footer: React.FC = () => {
           <p className="text-xs text-gray-600 flex items-center justify-center gap-1">
             Made with
             <Heart className="w-3 h-3 text-white/50 fill-white/50" />
-            © {currentYear} Peptide Pulse. All rights reserved.
+            © {currentYear} X Peptide. All rights reserved.
           </p>
         </div>
       </div>

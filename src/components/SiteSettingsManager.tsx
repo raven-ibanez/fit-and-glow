@@ -103,7 +103,7 @@ const SiteSettingsManager: React.FC = () => {
         hero_title_suffix: '& Essentials',
         hero_subtext: 'From the Lab to You — Simplifying Science, One Dose at a Time.',
         hero_tagline: 'Quality-tested products. Reliable performance. Trusted by our community.',
-        hero_description: 'Peptide Pulse is your all-in-one destination for high-quality peptides, peptide pens, and the essential accessories you need for a smooth and confident wellness routine.',
+        hero_description: 'X Peptide is your all-in-one destination for high-quality peptides, peptide pens, and the essential accessories you need for a smooth and confident wellness routine.',
       }));
     }
   };

@@ -219,7 +219,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                   value={formData.account_name}
                   onChange={(e) => setFormData({ ...formData, account_name: e.target.value })}
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-gray-900"
-                  placeholder="Peptide Pulse"
+                  placeholder="X Peptide"
                 />
               </div>
 

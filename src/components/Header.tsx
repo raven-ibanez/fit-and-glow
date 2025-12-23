@@ -26,14 +26,14 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden border border-white/20 shadow-glow">
                   <img
                     src="/assets/logo.jpg"
-                    alt="Peptide Pulse"
+                    alt="X Peptide"
                     className="w-full h-full object-cover"
                   />
                 </div>
               </div>
               <div className="text-left min-w-0 flex-1">
                 <h1 className="text-lg sm:text-xl font-black text-white leading-tight whitespace-nowrap overflow-hidden text-ellipsis tracking-tight">
-                  PEPTIDE PULSE
+                  X PEPTIDE
                 </h1>
                 <p className="text-xs text-gray-500 font-medium">
                   Premium Research Peptides

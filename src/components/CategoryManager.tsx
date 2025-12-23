@@ -283,11 +283,10 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onBack }) => {
             </div>
             <button
               onClick={handleAddCategory}
-              className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg transition-all flex items-center gap-1.5 sm:gap-2 shadow-md hover:shadow-lg text-xs sm:text-sm font-semibold active:scale-95 flex-shrink-0"
+              className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-black px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg transition-all flex items-center gap-1.5 sm:gap-2 shadow-md hover:shadow-lg text-xs sm:text-sm font-bold active:scale-95 flex-shrink-0 border border-gold-700"
             >
               <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline">Add Category</span>
-              <span className="sm:hidden">Add</span>
+              <span>Add Category</span>
             </button>
           </div>
         </div>

@@ -284,7 +284,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
       });
 
       const orderDetails = `
-✨Peptide Pulse - NEW ORDER
+✨X Peptide - NEW ORDER
 
 📅 ORDER DATE & TIME
 ${dateTimeStamp}

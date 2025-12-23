@@ -1177,13 +1177,13 @@ const AdminDashboard: React.FC = () => {
                 <div className="w-10 h-10 rounded-xl overflow-hidden border border-gray-200 shadow-sm">
                   <img
                     src="/assets/logo.jpg"
-                    alt="Peptide Pulse"
+                    alt="X Peptide"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
                   <h1 className="text-lg font-bold text-gray-900 tracking-tight">
-                    PEPTIDE PULSE
+                    X PEPTIDE
                   </h1>
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>

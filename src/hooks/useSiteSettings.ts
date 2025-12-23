@@ -23,7 +23,7 @@ export const useSiteSettings = () => {
 
       // Transform the data into a more usable format
       const settings: SiteSettings = {
-        site_name: settingsData.find(s => s.id === 'site_name')?.value || 'Peptide Pulse',
+        site_name: settingsData.find(s => s.id === 'site_name')?.value || 'X Peptide',
         site_logo: settingsData.find(s => s.id === 'site_logo')?.value || '/assets/logo.jpeg',
         site_description: settingsData.find(s => s.id === 'site_description')?.value || '',
         currency: settingsData.find(s => s.id === 'currency')?.value || 'PHP',
@@ -34,7 +34,7 @@ export const useSiteSettings = () => {
         hero_title_suffix: settingsData.find(s => s.id === 'hero_title_suffix')?.value || '& Essentials',
         hero_subtext: settingsData.find(s => s.id === 'hero_subtext')?.value || 'From the Lab to You — Simplifying Science, One Dose at a Time.',
         hero_tagline: settingsData.find(s => s.id === 'hero_tagline')?.value || 'Quality-tested products. Reliable performance. Trusted by our community.',
-        hero_description: settingsData.find(s => s.id === 'hero_description')?.value || 'Peptide Pulse is your all-in-one destination for high-quality peptides, peptide pens, and the essential accessories you need for a smooth and confident wellness routine.',
+        hero_description: settingsData.find(s => s.id === 'hero_description')?.value || 'X Peptide is your all-in-one destination for high-quality peptides, peptide pens, and the essential accessories you need for a smooth and confident wellness routine.',
         hero_accent_color: settingsData.find(s => s.id === 'hero_accent_color')?.value || 'gold-500'
       };
 

@@ -625,7 +625,7 @@ const AdminDashboard: React.FC = () => {
                         setFormData({ ...formData, inclusions: items.length > 0 ? items : null });
                       }}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-black placeholder-gray-400 min-h-[80px]"
-                      placeholder="Example:&#10;Syringe for Reconstitution&#10;6 Insulin Syringes (7pcs for 30mg)&#10;10pcs Alcohol Pads&#10;Tirzepatide Printed Guide&#10;Transparent vial case and vial cap&#10;Peptide Injection and Inventory Spreadsheet tracker"
+                      placeholder="Xpeptide Kit Inclusion:&#10;1 Peptide Vial&#10;1 Bacteriostatic Water&#10;6 Insulin Syringes&#10;1 3ml Syringe&#10;Alcohol Pads&#10;Xpeptide Manual Guide"
                       rows={6}
                     />
                     <p className="text-xs text-gray-500 mt-2 flex items-start gap-1.5">

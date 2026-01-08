@@ -12,7 +12,7 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
     setIsVisible(true);
   }, []);
 
-  const description = 'Science-guided weight and metabolic support designed for balance, sustainability, and real-life wellness.';
+
 
   return (
     <div className="relative min-h-[90vh] bg-white overflow-hidden">
@@ -223,7 +223,7 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
               }`}
           >
             <Leaf className="w-4 h-4 text-leaf-green-500" />
-            <span className="text-sm font-medium text-deep-blue-500 tracking-wide">Science Meets Nature</span>
+            <span className="text-sm font-medium text-deep-blue-500 tracking-wide">Your partner in the journey to confidence.</span>
           </div>
 
           {/* Main Headline */}
@@ -231,9 +231,9 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
             className={`font-poppins text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-deep-blue-500 tracking-tighter leading-[0.9] mb-6 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
           >
-            <span className="block">Balanced</span>
+            <span className="block">Glow.Slim.Transform</span>
             <span className="block">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 via-teal-400 to-leaf-green-500">Metabolic</span> Wellness
+              with <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 via-teal-400 to-leaf-green-500">Slimmetry</span>
             </span>
           </h1>
 
@@ -248,7 +248,8 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
             className={`text-lg sm:text-xl text-charcoal-500 max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
           >
-            {description}
+            <span className="block font-bold tracking-wide text-sm sm:text-base text-deep-blue-500 mb-3">TRUSTED BY THE SLIMMETRY COMMUNITY</span>
+            Carefully curated products • Transparent sourcing • Real user journeys
           </p>
 
           {/* CTA Buttons */}

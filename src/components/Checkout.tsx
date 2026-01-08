@@ -32,7 +32,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
   // Payment
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
-  const [contactMethod, setContactMethod] = useState<'whatsapp' | ''>('whatsapp');
+  const [contactMethod, setContactMethod] = useState<'instagram' | ''>('instagram');
   const [notes, setNotes] = useState('');
 
   const [orderMessage, setOrderMessage] = useState<string>('');
@@ -176,7 +176,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
   const handlePlaceOrder = async () => {
     if (!contactMethod) {
-      alert('Please select your preferred contact method (WhatsApp).');
+      alert('Please select your preferred contact method (Instagram).');
       return;
     }
 
@@ -337,7 +337,7 @@ ${paymentMethod?.name || 'N/A'}
 ${paymentProofUrl ? 'Screenshot attached to order.' : 'Pending'}
 
 📱 CONTACT METHOD
-WhatsApp: https://wa.me/639691574175
+Instagram: https://ig.me/m/slimmetryph
 
 📋 ORDER NUMBER: ${`SLIMMETRY-${Math.floor(Math.random() * 9000 + 1000)}`}
 
@@ -356,9 +356,9 @@ Please confirm this order. Thank you!
       }
 
       // Open contact method based on selection
-      // Using wa.me link to open WhatsApp directly
-      const contactUrl = contactMethod === 'whatsapp'
-        ? `https://wa.me/639691574175?text=${encodeURIComponent(orderDetails)}`
+      // Using ig.me link to open Instagram DM directly
+      const contactUrl = contactMethod === 'instagram'
+        ? 'https://ig.me/m/slimmetryph'
         : null;
 
       if (contactUrl) {
@@ -413,8 +413,8 @@ Please confirm this order. Thank you!
   };
 
   const handleOpenContact = () => {
-    const contactUrl = contactMethod === 'whatsapp'
-      ? `https://wa.me/639691574175?text=${encodeURIComponent(orderMessage)}`
+    const contactUrl = contactMethod === 'instagram'
+      ? 'https://ig.me/m/slimmetryph'
       : null;
 
     if (contactUrl) {
@@ -435,7 +435,7 @@ Please confirm this order. Thank you!
               <Sparkles className="w-7 h-7 text-gold-600" />
             </h1>
             <p className="text-gray-600 mb-4 text-base md:text-lg leading-relaxed">
-              Copy the order message below and send it via WhatsApp along with your payment screenshot.
+              Copy the order message below and send it via Instagram DM along with your payment screenshot.
             </p>
 
             {/* Order ID Display */}
@@ -487,7 +487,7 @@ Please confirm this order. Thank you!
               {copied && (
                 <p className="text-green-600 text-sm mt-2 flex items-center gap-1">
                   <Check className="w-4 h-4" />
-                  Message copied to clipboard! Paste it in WhatsApp along with your payment screenshot.
+                  Message copied to clipboard! Paste it in Instagram DM along with your payment screenshot.
                 </p>
               )}
             </div>
@@ -499,12 +499,12 @@ Please confirm this order. Thank you!
                 className="w-full bg-teal-500 hover:bg-teal-600 text-white py-3 md:py-4 rounded-2xl font-bold text-base md:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-5 h-5" />
-                Open WhatsApp
+                Open Instagram
               </button>
 
               {!contactOpened && (
                 <p className="text-sm text-gray-600">
-                  💡 If WhatsApp doesn't open, copy the message above and visit our number manually: +63 969 157 4175
+                  💡 If Instagram doesn't open, copy the message above and send it to @slimmetryph on Instagram
                 </p>
               )}
             </div>
@@ -529,7 +529,7 @@ Please confirm this order. Thank you!
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-2xl">4️⃣</span>
-                  <span>Tracking numbers are sent via WhatsApp from 11 PM onwards.</span>
+                  <span>Tracking numbers are sent via Instagram DM from 11 PM onwards.</span>
                 </li>
               </ul>
             </div>
@@ -991,8 +991,8 @@ Please confirm this order. Thank you!
               </h2>
               <div className="grid grid-cols-1 gap-3">
                 <button
-                  onClick={() => setContactMethod('whatsapp')}
-                  className={`p-4 rounded-lg border-2 transition-all flex items-center justify-between ${contactMethod === 'whatsapp'
+                  onClick={() => setContactMethod('instagram')}
+                  className={`p-4 rounded-lg border-2 transition-all flex items-center justify-between ${contactMethod === 'instagram'
                     ? 'border-navy-900 bg-gold-50'
                     : 'border-gray-200 hover:border-navy-700'
                     }`}
@@ -1000,11 +1000,11 @@ Please confirm this order. Thank you!
                   <div className="flex items-center gap-3">
                     <MessageCircle className="w-6 h-6 text-gold-600" />
                     <div className="text-left">
-                      <p className="font-semibold text-navy-900">WhatsApp</p>
-                      <p className="text-sm text-gray-500">+63 969 157 4175</p>
+                      <p className="font-semibold text-navy-900">Instagram</p>
+                      <p className="text-sm text-gray-500">@slimmetryph</p>
                     </div>
                   </div>
-                  {contactMethod === 'whatsapp' && (
+                  {contactMethod === 'instagram' && (
                     <div className="w-6 h-6 bg-gold-600 rounded-full flex items-center justify-center">
                       <span className="text-black text-xs font-bold">✓</span>
                     </div>

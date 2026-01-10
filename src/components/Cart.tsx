@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trash2, ShoppingBag, ArrowLeft, CreditCard, Plus, Minus, Sparkles, Heart } from 'lucide-react';
+import { Trash2, ShoppingBag, ArrowLeft, CreditCard, Plus, Minus, Sparkles, Activity } from 'lucide-react';
 import type { CartItem } from '../types';
 
 interface CartProps {
@@ -25,23 +25,22 @@ const Cart: React.FC<CartProps> = ({
     return (
       <div className="min-h-screen bg-white flex items-center justify-center px-4 py-12">
         <div className="text-center max-w-md">
-          <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-12 border-2 border-teal-100">
-            <div className="bg-gradient-to-br from-teal-500 to-teal-600 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
-              <ShoppingBag className="w-12 h-12 text-white" />
+          <div className="bg-white rounded-3xl p-12 border border-gray-100 shadow-clinical">
+            <div className="bg-clinical-blue w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+              <ShoppingBag className="w-10 h-10 text-science-blue-500" />
             </div>
-            <h2 className="text-2xl font-bold text-deep-blue-500 mb-3 flex items-center justify-center gap-2">
+            <h2 className="font-heading text-2xl font-bold text-science-blue-900 mb-3 flex items-center justify-center gap-2">
               Your cart is empty
-              <Heart className="w-6 h-6 text-leaf-green-400" />
             </h2>
-            <p className="text-charcoal-500 mb-8">
-              Start adding amazing products to your cart! ✨
+            <p className="text-gray-500 mb-8 max-w-xs mx-auto">
+              Select products from our catalog to proceed with your research order.
             </p>
             <button
               onClick={onContinueShopping}
-              className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-glow transform hover:scale-105 transition-all w-full flex items-center justify-center gap-2"
+              className="btn-primary w-full flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
             >
-              <ArrowLeft className="w-5 h-5" />
-              Browse Products
+              <ArrowLeft className="w-4 h-4" />
+              Browse Catalog
             </button>
           </div>
         </div>
@@ -55,42 +54,46 @@ const Cart: React.FC<CartProps> = ({
 
   return (
     <div className="min-h-screen bg-white py-6 md:py-8">
-      <div className="container mx-auto px-3 md:px-4">
+      <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
-        <div className="mb-6 md:mb-8">
+        <div className="mb-8">
           <button
             onClick={onContinueShopping}
-            className="text-deep-blue-500 hover:text-teal-500 font-medium mb-4 flex items-center gap-2 transition-colors group"
+            className="text-gray-500 hover:text-science-blue-600 font-medium mb-6 flex items-center gap-2 transition-colors group text-sm"
           >
-            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm md:text-base">Continue Shopping</span>
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Catalog</span>
           </button>
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl md:text-3xl font-bold text-deep-blue-500 flex items-center gap-2">
-              Shopping Cart
-              <Sparkles className="w-6 h-6 text-teal-500" />
-            </h1>
+          <div className="flex justify-between items-end pb-4 border-b border-gray-100">
+            <div>
+              <h1 className="font-heading text-2xl md:text-3xl font-bold text-science-blue-900 flex items-center gap-3">
+                Shopping Cart
+                <span className="text-sm font-normal text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                  {cartItems.reduce((sum, item) => sum + item.quantity, 0)} Items
+                </span>
+              </h1>
+            </div>
             <button
               onClick={clearCart}
-              className="text-red-500 hover:text-red-600 font-medium flex items-center gap-1.5 md:gap-2 transition-colors text-sm md:text-base hover:scale-105 transform"
+              className="text-red-500 hover:text-red-600 text-sm font-medium flex items-center gap-2 hover:bg-red-50 px-3 py-2 rounded transition-colors"
             >
-              <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
-              Clear
+              <Trash2 className="w-4 h-4" />
+              Clear Cart
             </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-3 md:space-y-4">
+          <div className="lg:col-span-2 space-y-4">
             {cartItems.map((item, index) => (
               <div
                 key={index}
-                className="bg-white backdrop-blur-sm rounded-lg shadow-card hover:shadow-card-hover p-4 md:p-6 transition-all animate-fadeIn border border-gray-200 hover:border-teal-300"
+                className="bg-white rounded p-4 md:p-6 border border-gray-100 shadow-sm transition-all hover:border-science-blue-200 hover:shadow-clinical"
               >
-                <div className="flex gap-4 md:gap-6">
+                <div className="flex gap-6">
                   {/* Product Image */}
-                  <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden shadow-md border border-gray-200">
+                  <div className="w-20 h-20 md:w-24 md:h-24 bg-secondary-50 rounded flex-shrink-0 border border-gray-100 overflow-hidden">
                     {item.product.image_url ? (
                       <img
                         src={item.product.image_url}
@@ -98,7 +101,7 @@ const Cart: React.FC<CartProps> = ({
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-500 to-leaf-green-500 bg-clip-text text-transparent">
+                      <div className="w-full h-full flex items-center justify-center text-science-blue-200 font-bold text-2xl bg-clinical-blue/30">
                         {item.product.name.charAt(0)}
                       </div>
                     )}
@@ -106,51 +109,46 @@ const Cart: React.FC<CartProps> = ({
 
                   {/* Product Details */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-deep-blue-500 text-sm md:text-base mb-1 truncate">
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <h3 className="font-heading font-bold text-science-blue-900 text-base md:text-lg mb-1">
                           {item.product.name}
                         </h3>
-                        {item.variation && (
-                          <p className="text-xs md:text-sm text-charcoal-500 font-medium">
-                            Variation: {item.variation.name}
-                          </p>
-                        )}
-                        {item.product.purity_percentage && item.product.purity_percentage > 0 ? (
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] md:text-xs font-medium bg-leaf-green-100 text-leaf-green-700">
-                              {item.product.purity_percentage}% Pure
+                        <div className="flex flex-wrap gap-2 text-xs">
+                          {item.variation && (
+                            <span className="text-gray-600 font-medium bg-gray-50 px-2 py-0.5 rounded border border-gray-100">
+                              Format: {item.variation.name}
                             </span>
-                          </div>
-                        ) : null}
+                          )}
+                          {item.product.purity_percentage && item.product.purity_percentage > 0 && (
+                            <span className="text-tech-teal font-medium flex items-center gap-1 bg-tech-teal-light/10 px-2 py-0.5 rounded">
+                              <Sparkles className="w-3 h-3" />
+                              {item.product.purity_percentage}% Purity
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <button
                         onClick={() => removeFromCart(index)}
-                        className="p-1.5 md:p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors ml-2"
-                        title="Remove from cart"
+                        className="text-gray-400 hover:text-red-500 transition-colors p-1"
+                        title="Remove item"
                       >
-                        <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
 
                     {/* Quantity and Price */}
-                    <div className="flex justify-between items-center mt-3 md:mt-4">
-                      <div className="flex items-center border-2 border-gray-200 rounded-xl bg-white shadow-sm">
+                    <div className="flex flex-col sm:flex-row justify-between items-end sm:items-center gap-4">
+                      {/* Qty Control */}
+                      <div className="flex items-center border border-gray-200 rounded bg-gray-50">
                         <button
                           onClick={() => updateQuantity(index, item.quantity - 1)}
-                          className="p-1.5 md:p-2 hover:bg-gray-50 transition-colors rounded-l-lg"
+                          className="p-2 hover:bg-gray-100 transition-colors rounded-l text-gray-600"
                         >
-                          <Minus className="w-3 h-3 md:w-4 md:h-4 text-deep-blue-500" />
+                          <Minus className="w-3 h-3" />
                         </button>
-                        <span className="px-3 md:px-4 py-1.5 md:py-2 font-bold text-deep-blue-500 min-w-[32px] md:min-w-[40px] text-center text-sm md:text-base">
+                        <span className="w-10 text-center font-bold text-science-blue-900 text-sm">
                           {item.quantity}
-                          {(() => {
-                            const availableStock = item.variation ? item.variation.stock_quantity : item.product.stock_quantity;
-                            if (availableStock > 0) {
-                              return <span className="block text-[10px] text-gray-500">/ {availableStock}</span>;
-                            }
-                            return null;
-                          })()}
                         </span>
                         <button
                           onClick={() => {
@@ -165,19 +163,45 @@ const Cart: React.FC<CartProps> = ({
                             const availableStock = item.variation ? item.variation.stock_quantity : item.product.stock_quantity;
                             return item.quantity >= availableStock;
                           })()}
-                          className="p-1.5 md:p-2 hover:bg-gray-50 transition-colors rounded-r-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="p-2 hover:bg-gray-100 transition-colors rounded-r text-gray-600 disabled:opacity-50"
                         >
-                          <Plus className="w-3 h-3 md:w-4 md:h-4 text-deep-blue-500" />
+                          <Plus className="w-3 h-3" />
                         </button>
                       </div>
 
                       <div className="text-right">
-                        <div className="text-xl md:text-2xl font-bold text-teal-600">
-                          ₱{(item.price * item.quantity).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
-                        </div>
-                        <div className="text-[10px] md:text-xs text-charcoal-500">
-                          ₱{item.price.toLocaleString('en-PH', { minimumFractionDigits: 0 })} each
-                        </div>
+                        {(() => {
+                          // Calculate original price
+                          const originalPrice = item.variation
+                            ? item.variation.price
+                            : item.product.base_price;
+
+                          // Check if this item is discounted
+                          const isDiscounted = item.variation
+                            ? (item.variation.discount_active && item.variation.discount_price !== null && item.variation.discount_price < originalPrice)
+                            : (item.product.discount_active && item.product.discount_price !== null && item.product.discount_price < item.product.base_price);
+
+                          return (
+                            <>
+                              <div className="text-lg md:text-xl font-bold text-science-blue-900">
+                                ₱{(item.price * item.quantity).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                              </div>
+                              {isDiscounted && (
+                                <div className="text-xs text-gray-400 line-through">
+                                  ₱{(originalPrice * item.quantity).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                                </div>
+                              )}
+                              <div className="text-xs text-gray-400">
+                                ₱{item.price.toLocaleString('en-PH', { minimumFractionDigits: 0 })} / unit
+                                {isDiscounted && (
+                                  <span className="ml-1 text-bio-green font-medium">
+                                    ({Math.round((1 - item.price / originalPrice) * 100)}% off)
+                                  </span>
+                                )}
+                              </div>
+                            </>
+                          );
+                        })()}
                       </div>
                     </div>
                   </div>
@@ -188,74 +212,66 @@ const Cart: React.FC<CartProps> = ({
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white backdrop-blur-sm rounded-lg shadow-card-hover p-5 md:p-6 sticky top-24 border border-gray-200">
-              <h2 className="text-lg md:text-xl font-bold text-deep-blue-500 mb-4 md:mb-6 flex items-center gap-2">
+            <div className="bg-white rounded shadow-clinical p-6 sticky top-24 border border-gray-100">
+              <h2 className="font-heading text-lg font-bold text-science-blue-900 mb-6 flex items-center gap-2">
                 Order Summary
-                <Sparkles className="w-5 h-5 text-teal-500" />
+                <Activity className="w-4 h-4 text-tech-teal" />
               </h2>
 
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-charcoal-500 text-sm md:text-base">
-                  <span>Subtotal ({cartItems.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
-                  <span className="font-semibold">₱{totalPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}</span>
-                </div>
-                <div className="flex flex-col gap-1 text-charcoal-500 text-xs md:text-sm">
-                  <div className="flex justify-between">
-                    <span>Shipping</span>
-                    <span className="text-charcoal-500 font-medium">Calculated at checkout</span>
-                  </div>
-                  <div className="mt-2 space-y-1 text-charcoal-400">
-                    <p className="font-semibold text-deep-blue-500">LBC Shipping Rates:</p>
-                    <ul className="list-disc pl-4 space-y-0.5">
-                      <li>Metro Manila: ₱150</li>
-                      <li>Provincial: ₱200</li>
-                    </ul>
-                    <p className="font-semibold text-deep-blue-500 mt-2">Lalamove:</p>
-                    <p className="pl-4">Fee paid by customer upon booking</p>
-                  </div>
+                <div className="flex justify-between text-gray-600 text-sm">
+                  <span>Subtotal</span>
+                  <span className="font-semibold text-science-blue-900">₱{totalPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}</span>
                 </div>
 
-                <div className="border-t-2 border-dashed border-gray-200 pt-3 mt-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-base md:text-lg font-bold text-deep-blue-500">Total</span>
-                    <span className="text-2xl md:text-3xl font-bold text-teal-600">
+                <div className="pt-3 border-t border-gray-100">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-base font-bold text-science-blue-900">Total Estimate</span>
+                    <span className="text-2xl font-bold text-science-blue-900">
                       ₱{finalTotal.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                     </span>
                   </div>
-                  <p className="text-xs text-charcoal-400 mt-1 text-right">+ Shipping fee (calculated on checkout)</p>
+                  <p className="text-xs text-gray-400 text-right font-normal">+ Shipping calculated at checkout</p>
                 </div>
+              </div>
+
+              <div className="bg-clinical-blue/30 rounded p-4 mb-6 border border-science-blue-100">
+                <p className="text-xs text-science-blue-700 font-medium mb-2">Shipping Information:</p>
+                <ul className="text-xs text-gray-600 space-y-1">
+                  <li className="flex justify-between"><span>Metro Manila</span> <span className="font-medium">₱150</span></li>
+                  <li className="flex justify-between"><span>Provincial</span> <span className="font-medium">₱200</span></li>
+                </ul>
               </div>
 
               <button
                 onClick={onCheckout}
-                className="w-full bg-teal-500 hover:bg-teal-600 text-white py-3 md:py-4 rounded-lg font-semibold text-sm md:text-base shadow-glow hover:shadow-glow-lg transform hover:scale-105 transition-all mb-3 flex items-center justify-center gap-2"
+                className="w-full btn-primary py-3 md:py-4 text-sm md:text-base mb-3 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
               >
-                <CreditCard className="w-5 h-5" />
+                <CreditCard className="w-4 h-4" />
                 Proceed to Checkout
               </button>
 
               <button
                 onClick={onContinueShopping}
-                className="w-full bg-white hover:bg-gray-50 text-deep-blue-500 border border-gray-300 hover:border-teal-400 py-2.5 md:py-3 rounded-lg font-medium text-sm md:text-base transition-all flex items-center justify-center gap-2"
+                className="w-full btn-secondary py-3 text-sm flex items-center justify-center gap-2"
               >
-                <ArrowLeft className="w-4 h-4" />
-                Continue Shopping
+                Continue Browsing
               </button>
 
               {/* Trust Badges */}
-              <div className="mt-6 pt-6 border-t-2 border-dashed border-gray-200 space-y-2">
-                <p className="flex items-center gap-2 text-xs md:text-sm text-charcoal-500">
-                  <span className="text-leaf-green-500 text-lg">✓</span>
-                  Secure checkout
-                </p>
-                <p className="flex items-center gap-2 text-xs md:text-sm text-charcoal-500">
-                  <span className="text-leaf-green-500 text-lg">✓</span>
-                  Lab-tested products
-                </p>
-                <p className="flex items-center gap-2 text-xs md:text-sm text-charcoal-500">
-                  <span className="text-leaf-green-500 text-lg">✓</span>
-                  Fast delivery 🚚
-                </p>
+              <div className="mt-6 pt-6 border-t border-gray-100 flex flex-col gap-2">
+                <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <div className="w-4 h-4 rounded-full bg-bio-green/10 flex items-center justify-center text-bio-green">✓</div>
+                  <span>Secure Encrypted Checkout</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <div className="w-4 h-4 rounded-full bg-bio-green/10 flex items-center justify-center text-bio-green">✓</div>
+                  <span>HPLC Verified Purity</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <div className="w-4 h-4 rounded-full bg-bio-green/10 flex items-center justify-center text-bio-green">✓</div>
+                  <span>Discreet Packaging</span>
+                </div>
               </div>
             </div>
           </div>

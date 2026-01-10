@@ -23,8 +23,8 @@ export const useSiteSettings = () => {
 
       // Transform the data into a more usable format
       const settings: SiteSettings = {
-        site_name: settingsData.find(s => s.id === 'site_name')?.value || 'SLIMMETRY',
-        site_logo: settingsData.find(s => s.id === 'site_logo')?.value || '/assets/logo.jpeg',
+        site_name: settingsData.find(s => s.id === 'site_name')?.value || 'RS PEPTIDES',
+        site_logo: settingsData.find(s => s.id === 'site_logo')?.value || '/rs-peptides-logo.png',
         site_description: settingsData.find(s => s.id === 'site_description')?.value || '',
         currency: settingsData.find(s => s.id === 'currency')?.value || 'PHP',
         currency_code: settingsData.find(s => s.id === 'currency_code')?.value || 'PHP',
@@ -34,7 +34,7 @@ export const useSiteSettings = () => {
         hero_title_suffix: settingsData.find(s => s.id === 'hero_title_suffix')?.value || '& Essentials',
         hero_subtext: settingsData.find(s => s.id === 'hero_subtext')?.value || 'From the Lab to You — Simplifying Science, One Dose at a Time.',
         hero_tagline: settingsData.find(s => s.id === 'hero_tagline')?.value || 'Quality-tested products. Reliable performance. Trusted by our community.',
-        hero_description: settingsData.find(s => s.id === 'hero_description')?.value || 'SLIMMETRY offers science-guided weight and metabolic support designed for balance, sustainability, and real-life wellness.',
+        hero_description: settingsData.find(s => s.id === 'hero_description')?.value || 'RS PEPTIDES provides research-grade peptides engineered for precision, purity, and consistency.',
         hero_accent_color: settingsData.find(s => s.id === 'hero_accent_color')?.value || 'gold-500'
       };
 

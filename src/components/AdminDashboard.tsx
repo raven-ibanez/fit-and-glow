@@ -373,8 +373,8 @@ const AdminDashboard: React.FC = () => {
           <div className="text-center mb-6">
             <div className="relative mx-auto w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-theme-accent/30">
               <img
-                src="/assets/logo.jpg"
-                alt="SLIMMETRY"
+                src="/rs-peptides-logo.png"
+                alt="RS PEPTIDES"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -1176,14 +1176,14 @@ const AdminDashboard: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-xl overflow-hidden border border-gray-200 shadow-sm">
                   <img
-                    src="/assets/logo.jpg"
-                    alt="SLIMMETRY"
+                    src="/rs-peptides-logo.png"
+                    alt="RS PEPTIDES"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
                   <h1 className="text-lg font-bold text-gray-900 tracking-tight">
-                    SLIMMETRY
+                    RS PEPTIDES
                   </h1>
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>

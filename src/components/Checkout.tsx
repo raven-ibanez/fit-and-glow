@@ -32,7 +32,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
   // Payment
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
-  const [contactMethod, setContactMethod] = useState<'instagram' | ''>('instagram');
+  const [contactMethod, setContactMethod] = useState<'facebook' | 'viber' | ''>('facebook');
   const [notes, setNotes] = useState('');
 
   const [orderMessage, setOrderMessage] = useState<string>('');
@@ -172,7 +172,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
   const handlePlaceOrder = async () => {
     if (!contactMethod) {
-      alert('Please select your preferred contact method (Instagram).');
+      alert('Please select your preferred contact method (Facebook or Viber).');
       return;
     }
 
@@ -350,9 +350,11 @@ Please confirm this order. Thank you!
       }
 
       // Open contact method based on selection
-      const contactUrl = contactMethod === 'instagram'
-        ? 'https://ig.me/m/slimmetryph'
-        : null;
+      const contactUrl = contactMethod === 'facebook'
+        ? 'https://m.me/61585973522665'
+        : contactMethod === 'viber'
+          ? 'viber://chat?number=09665487151'
+          : null;
 
       if (contactUrl) {
         setTimeout(() => {
@@ -392,9 +394,11 @@ Please confirm this order. Thank you!
   };
 
   const handleOpenContact = () => {
-    const contactUrl = contactMethod === 'instagram'
-      ? 'https://ig.me/m/slimmetryph'
-      : null;
+    const contactUrl = contactMethod === 'facebook'
+      ? 'https://m.me/61585973522665'
+      : contactMethod === 'viber'
+        ? 'viber://chat?number=09665487151'
+        : null;
 
     if (contactUrl) {
       window.open(contactUrl, '_blank');
@@ -413,7 +417,7 @@ Please confirm this order. Thank you!
               Order Confirmed
             </h1>
             <p className="text-gray-600 mb-4 text-base md:text-lg leading-relaxed">
-              Copy the order message below and send it via Instagram DM along with your payment screenshot to finalize your research order.
+              Copy the order message below and send it via {contactMethod === 'facebook' ? 'Facebook Messenger' : 'Viber'} along with your payment screenshot to finalize your research order.
             </p>
 
             {/* Order ID Display */}
@@ -459,7 +463,7 @@ Please confirm this order. Thank you!
               {copied && (
                 <p className="text-bio-green text-sm mt-2 flex items-center gap-1 font-medium">
                   <Check className="w-4 h-4" />
-                  Copied to clipboard! Ready to send via Instagram.
+                  Copied to clipboard! Ready to send.
                 </p>
               )}
             </div>
@@ -471,12 +475,12 @@ Please confirm this order. Thank you!
                 className="w-full btn-primary py-4 text-base flex items-center justify-center gap-2 shadow-lg"
               >
                 <MessageCircle className="w-5 h-5" />
-                Open Instagram & Send
+                {contactMethod === 'facebook' ? 'Open Facebook Messenger' : 'Open Viber'} & Send
               </button>
 
               {!contactOpened && (
                 <p className="text-sm text-gray-500">
-                  If Instagram doesn't open automatically, please manually send the copied message to <span className="font-bold">@slimmetryph</span>
+                  If it doesn't open automatically, please manually send the copied message to <span className="font-bold">{contactMethod === 'facebook' ? 'RS Peptides PH on Facebook' : 'Viber: 09665487151'}</span>
                 </p>
               )}
             </div>
@@ -501,7 +505,7 @@ Please confirm this order. Thank you!
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="font-bold text-science-blue-500">4.</span>
-                  <span>Tracking details sent via Instagram after dispatch.</span>
+                  <span>Tracking details sent via {contactMethod === 'facebook' ? 'Messenger' : 'Viber'} after dispatch.</span>
                 </li>
               </ul>
             </div>
@@ -518,7 +522,7 @@ Please confirm this order. Thank you!
             </button>
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 
@@ -829,6 +833,52 @@ Please confirm this order. Thank you!
               </div>
             </div>
 
+            {/* Contact Method Selection */}
+            <div className="bg-white rounded shadow-clinical p-6 border border-gray-100">
+              <h2 className="font-heading text-lg font-bold text-science-blue-900 mb-3 flex items-center gap-2">
+                <MessageCircle className="w-5 h-5 text-tech-teal" />
+                Contact Method *
+              </h2>
+              <p className="text-xs text-gray-500 mb-4">
+                Choose how you'd like to send your order details after checkout.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setContactMethod('facebook')}
+                  className={`p-4 rounded border transition-all flex items-center gap-3 ${contactMethod === 'facebook'
+                    ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
+                    : 'border-gray-200 hover:border-science-blue-300'
+                    }`}
+                >
+                  <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                  <div className="text-left">
+                    <p className="font-bold text-science-blue-900 text-sm">Facebook Messenger</p>
+                    <p className="text-xs text-gray-500">RS Peptides PH</p>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setContactMethod('viber')}
+                  className={`p-4 rounded border transition-all flex items-center gap-3 ${contactMethod === 'viber'
+                    ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
+                    : 'border-gray-200 hover:border-science-blue-300'
+                    }`}
+                >
+                  <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.398.002C9.47.028 5.276.474 3.005 2.6 1.268 4.236.463 6.676.388 9.709c-.076 3.032-.172 8.73 5.31 10.279l.003.001h.004l-.002 2.343s-.04.946.586 1.14c.756.234 1.2-.486 1.922-1.264.396-.427.942-1.055 1.356-1.533 3.736.315 6.609-.405 6.934-.506.75-.233 4.996-.789 5.686-6.44.713-5.836-.343-9.53-2.263-11.193l.004-.003C18.397.564 14.968-.04 11.398.002zm.297 1.954c3.194-.038 6.14.38 7.497 1.563 1.552 1.402 2.236 4.578 1.618 9.603-.536 4.394-3.787 4.86-4.403 5.05-.267.083-2.75.702-5.863.476 0 0-2.322 2.803-3.048 3.535-.115.115-.249.16-.337.14-.124-.03-.158-.176-.156-.39l.026-3.828v-.002c-4.615-1.225-4.346-5.903-4.282-8.497.064-2.593.715-4.63 2.152-6.015 1.696-1.56 5.603-1.962 6.796-1.635z" />
+                    <path d="M12.2 5.21c-.14 0-.26.115-.26.26s.116.26.26.26c1.88.012 3.404 1.548 3.415 3.428 0 .143.115.26.26.26.14 0 .26-.117.26-.26-.01-2.17-1.766-3.936-3.935-3.948zM8.638 7.098c-.134-.024-.28.016-.396.126l-.658.613c-.168.157-.23.39-.168.608.05.177.11.346.178.508.32.816.86 1.622 1.622 2.393.762.77 1.582 1.32 2.416 1.65.175.068.357.13.546.183.29.081.588-.018.755-.244l.552-.698c.12-.156.14-.37.04-.548l-.002-.002a1.5 1.5 0 00-.042-.068L12.55 9.92c-.178-.23-.43-.27-.642-.11l-.59.434a.42.42 0 01-.482.012 11.24 11.24 0 01-1.024-.77 11.24 11.24 0 01-.862-.95.42.42 0 01-.03-.487l.39-.62c.136-.213.114-.47-.064-.67l-1.21-1.422a.409.409 0 00-.398-.14zM12.2 6.584c-.14 0-.258.115-.258.26 0 .143.117.26.26.26 1.32.01 2.39 1.092 2.4 2.416 0 .143.117.26.26.26.144 0 .26-.117.26-.26-.01-1.614-1.316-2.926-2.922-2.936zm0 1.376c-.14 0-.258.115-.258.26-.002.143.115.26.258.26.605.004 1.094.5 1.1 1.104 0 .143.115.26.26.26.143 0 .26-.117.258-.26-.006-.893-.73-1.62-1.618-1.624z" />
+                  </svg>
+                  <div className="text-left">
+                    <p className="font-bold text-science-blue-900 text-sm">Viber</p>
+                    <p className="text-xs text-gray-500">09665487151</p>
+                  </div>
+                </button>
+              </div>
+            </div>
+
             {/* Shipping Location Selection */}
             <div className="bg-white rounded shadow-clinical p-6 border border-gray-100">
               <h2 className="font-heading text-lg font-bold text-science-blue-900 mb-3 flex items-center gap-2">
@@ -837,7 +887,7 @@ Please confirm this order. Thank you!
               <p className="text-xs text-gray-500 mb-6 bg-blue-50 p-3 rounded border border-blue-100">
                 Small pouch standard shipping (up to 3 pens). For bulk orders, manual adjustment may apply.
               </p>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {shippingLocations.map((loc) => (
                   <button
                     key={loc.id}

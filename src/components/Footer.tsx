@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, HelpCircle, Calculator, FileText, Truck } from 'lucide-react';
+import { Activity, HelpCircle, Calculator, FileText, Truck, Phone, Mail, MessageCircle } from 'lucide-react';
 import { useCOAPageSetting } from '../hooks/useCOAPageSetting';
 
 const Footer: React.FC = () => {
@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-science-blue-900 pt-16 pb-8 border-t border-science-blue-800">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
 
           {/* Brand Section */}
           <div className="flex flex-col items-center md:items-start gap-4">
@@ -25,18 +25,60 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
+          {/* Contact Us */}
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-2">Contact Us</h3>
+
+            <a
+              href="tel:09761536129"
+              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
+            >
+              <Phone className="w-4 h-4 text-tech-teal" />
+              0976-153-6129
+            </a>
+
+            <a
+              href="viber://chat?number=09665487151"
+              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
+            >
+              <MessageCircle className="w-4 h-4 text-bio-green" />
+              Viber: 09665487151
+            </a>
+
+            <a
+              href="https://www.facebook.com/profile.php?id=61585973522665"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
+            >
+              <svg className="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+              RS Peptides PH
+            </a>
+
+            <a
+              href="mailto:Rspeptides8@gmail.com"
+              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
+            >
+              <Mail className="w-4 h-4 text-tech-teal" />
+              Rspeptides8@gmail.com
+            </a>
+          </div>
+
           {/* Quick Links */}
-          <div className="flex flex-wrap items-center gap-6 justify-center md:justify-end">
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-2">Quick Links</h3>
             <a
               href="/track-order"
-              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
             >
               <Truck className="w-4 h-4" />
-              Track
+              Track Order
             </a>
             <a
               href="/calculator"
-              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
             >
               <Calculator className="w-4 h-4" />
               Calculator
@@ -44,7 +86,7 @@ const Footer: React.FC = () => {
             {coaPageEnabled && (
               <a
                 href="/coa"
-                className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
+                className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
               >
                 <FileText className="w-4 h-4" />
                 Lab Reports
@@ -52,13 +94,13 @@ const Footer: React.FC = () => {
             )}
             <a
               href="/faq"
-              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
+              className="text-science-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
             >
               <HelpCircle className="w-4 h-4" />
               FAQ
             </a>
-
           </div>
+
         </div>
 
         {/* Divider */}

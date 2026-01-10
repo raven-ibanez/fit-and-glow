@@ -106,14 +106,10 @@ const Footer: React.FC = () => {
         {/* Divider */}
         <div className="h-px bg-science-blue-800 mb-6" />
 
-        {/* Locations */}
+        {/* Location */}
         <div className="text-center mb-6">
-          <p className="text-xs text-science-blue-300 font-bold uppercase tracking-wider mb-2">Our Locations</p>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6">
-            <span className="text-xs text-science-blue-400">Mandaluyong, Metro Manila</span>
-            <span className="hidden md:inline text-science-blue-700">•</span>
-            <span className="text-xs text-science-blue-400">Bajada, Davao City</span>
-          </div>
+          <p className="text-xs text-science-blue-300 font-bold uppercase tracking-wider mb-2">Our Location</p>
+          <span className="text-xs text-science-blue-400">Metro Manila</span>
         </div>
 
         {/* Footer Bottom */}

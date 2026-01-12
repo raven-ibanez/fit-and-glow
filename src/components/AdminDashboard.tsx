@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Save, X, ArrowLeft, TrendingUp, Package, Users, FolderOpen, CreditCard, Sparkles, Layers, Shield, RefreshCw, Warehouse, ShoppingCart, HelpCircle, MapPin, Settings, Tag, Truck } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, ArrowLeft, TrendingUp, Package, Users, FolderOpen, CreditCard, Sparkles, Layers, Shield, RefreshCw, Warehouse, ShoppingCart, HelpCircle, MapPin, Tag, Truck } from 'lucide-react';
 import type { Product } from '../types';
 import { useMenu } from '../hooks/useMenu';
 import { useCategories } from '../hooks/useCategories';
@@ -41,6 +41,7 @@ const AdminDashboard: React.FC = () => {
     <VariationManager
       product={variationManagerProduct}
       onClose={() => setManagingVariationsProductId(null)}
+      onUpdate={refreshProducts}
     />
   ) : null;
 
@@ -61,6 +62,7 @@ const AdminDashboard: React.FC = () => {
     discount_active: false,
     inclusions: null
   });
+  const [inclusionsText, setInclusionsText] = useState('');
 
   const handleAddProduct = () => {
     setCurrentView('add');
@@ -84,11 +86,13 @@ const AdminDashboard: React.FC = () => {
       discount_active: false,
       inclusions: null
     });
+    setInclusionsText('');
   };
 
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
     setFormData(product);
+    setInclusionsText(product.inclusions ? product.inclusions.join('\n') : '');
     setCurrentView('edit');
     setSelectedProducts(new Set());
     setManagingVariationsProductId(null);
@@ -606,8 +610,10 @@ const AdminDashboard: React.FC = () => {
                       onChange={(e) => {
                         if (!e.target.checked) {
                           setFormData({ ...formData, inclusions: null });
+                          setInclusionsText('');
                         } else {
                           setFormData({ ...formData, inclusions: formData.inclusions || [] });
+                          setInclusionsText(formData.inclusions ? formData.inclusions.join('\n') : '');
                         }
                       }}
                       className="w-4 h-4 text-theme-accent rounded focus:ring-theme-accent"
@@ -621,8 +627,9 @@ const AdminDashboard: React.FC = () => {
                       What's included in this set? (One item per line)
                     </label>
                     <textarea
-                      value={formData.inclusions?.join('\n') || ''}
+                      value={inclusionsText}
                       onChange={(e) => {
+                        setInclusionsText(e.target.value);
                         const items = e.target.value.split('\n').filter(item => item.trim() !== '');
                         setFormData({ ...formData, inclusions: items.length > 0 ? items : null });
                       }}
@@ -640,7 +647,10 @@ const AdminDashboard: React.FC = () => {
                     <p className="text-xs text-gray-500 mb-2">Enable "This is a SET product" to add inclusions</p>
                     <button
                       type="button"
-                      onClick={() => setFormData({ ...formData, inclusions: [] })}
+                      onClick={() => {
+                        setFormData({ ...formData, inclusions: [] });
+                        setInclusionsText('');
+                      }}
                       className="text-xs text-theme-accent hover:text-gold-700 font-medium"
                     >
                       Enable SET feature

@@ -6,9 +6,10 @@ import { useMenu } from '../hooks/useMenu';
 interface VariationManagerProps {
   product: Product;
   onClose: () => void;
+  onUpdate: () => void;
 }
 
-const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose }) => {
+const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, onUpdate }) => {
   const { addVariation, updateVariation, deleteVariation } = useMenu();
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -61,6 +62,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
         });
         setIsAdding(false);
         alert('Variation added successfully!');
+        onUpdate();
       } else {
         alert(result.error || 'Failed to add variation');
       }
@@ -96,6 +98,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
       if (result.success) {
         setEditingId(null);
         alert('Variation updated successfully!');
+        onUpdate();
       } else {
         alert(result.error || 'Failed to update variation');
       }
@@ -114,6 +117,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
       const result = await deleteVariation(id);
       if (result.success) {
         alert('Variation deleted successfully!');
+        onUpdate();
       } else {
         alert(result.error || 'Failed to delete variation');
       }

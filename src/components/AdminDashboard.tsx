@@ -15,6 +15,7 @@ import ShippingManager from './ShippingManager';
 import SiteSettingsManager from './SiteSettingsManager';
 import PromoCodeManager from './PromoCodeManager';
 import CourierManager from './CourierManager';
+import ProtocolManager from './ProtocolManager';
 // GuideManager removed (Peptalk functionality disabled)
 
 const AdminDashboard: React.FC = () => {
@@ -25,7 +26,7 @@ const AdminDashboard: React.FC = () => {
   const [loginError, setLoginError] = useState('');
   const { products, loading, addProduct, updateProduct, deleteProduct, refreshProducts } = useMenu();
   const { categories } = useCategories();
-  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'add' | 'edit' | 'categories' | 'payments' | 'inventory' | 'orders' | 'shipping' | 'coa' | 'faq' | 'settings' | 'promo-codes' | 'couriers'>('dashboard');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'add' | 'edit' | 'categories' | 'payments' | 'inventory' | 'orders' | 'shipping' | 'coa' | 'faq' | 'settings' | 'promo-codes' | 'couriers' | 'protocols'>('dashboard');
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [managingVariationsProductId, setManagingVariationsProductId] = useState<string | null>(null);
@@ -1101,6 +1102,15 @@ const AdminDashboard: React.FC = () => {
     );
   }
 
+  // Protocols View
+  if (currentView === 'protocols') {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <ProtocolManager onBack={() => setCurrentView('dashboard')} />
+      </div>
+    );
+  }
+
   // COA View
   if (currentView === 'coa') {
     return (
@@ -1426,6 +1436,18 @@ const AdminDashboard: React.FC = () => {
                   <div>
                     <span className="block text-sm font-semibold text-gray-900 group-hover:text-teal-600 transition-colors">FAQ</span>
                     <span className="text-xs text-gray-500">Manage content</span>
+                  </div>
+                </button>
+                <button
+                  onClick={() => setCurrentView('protocols')}
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-gray-50 rounded-xl transition-all border border-transparent hover:border-gray-200"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-rose-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Shield className="h-5 w-5 text-rose-600" />
+                  </div>
+                  <div>
+                    <span className="block text-sm font-semibold text-gray-900 group-hover:text-rose-600 transition-colors">Protocols</span>
+                    <span className="text-xs text-gray-500">Peptide guides</span>
                   </div>
                 </button>
               </div>

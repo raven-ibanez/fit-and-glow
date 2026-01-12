@@ -13,6 +13,7 @@ import COA from './components/COA';
 import FAQ from './components/FAQ';
 import PeptideCalculator from './components/PeptideCalculator';
 import OrderTracking from './components/OrderTracking';
+import ProtocolGuide from './components/ProtocolGuide';
 // Peptalk components removed
 import { useMenu } from './hooks/useMenu';
 // import { useCOAPageSetting } from './hooks/useCOAPageSetting';
@@ -106,6 +107,7 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/calculator" element={<PeptideCalculator />} />
         <Route path="/track-order" element={<OrderTracking />} />
+        <Route path="/protocols" element={<ProtocolGuide />} />
         {/* Peptalk routes removed */}
         <Route path="/admin" element={<AdminDashboard />} />
       </Routes>

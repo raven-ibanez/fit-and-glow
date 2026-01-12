@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingCart, Menu, X, FlaskConical, HelpCircle, Truck } from 'lucide-react';
+import { ShoppingCart, Menu, X, FlaskConical, HelpCircle, Truck, Calculator } from 'lucide-react';
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -38,6 +38,20 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   <FlaskConical className="w-4 h-4" />
                   Products
                 </button>
+                <a
+                  href="/calculator"
+                  className="text-sm font-medium text-charcoal-600 hover:text-rose-500 px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+                >
+                  <Calculator className="w-4 h-4" />
+                  Calculator
+                </a>
+                <a
+                  href="/protocols"
+                  className="text-sm font-medium text-charcoal-600 hover:text-rose-500 px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+                >
+                  <FlaskConical className="w-4 h-4" />
+                  Protocols
+                </a>
                 <a
                   href="/track-order"
                   className="text-sm font-medium text-charcoal-600 hover:text-rose-500 px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
@@ -128,6 +142,26 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   </div>
                   Products
                 </button>
+
+                <a
+                  href="/calculator"
+                  className="flex items-center gap-3 p-4 rounded-xl text-left font-medium text-charcoal-800 hover:bg-blush-50 transition-colors"
+                >
+                  <div className="p-2 rounded-lg bg-blush-50 text-rose-500">
+                    <Calculator className="w-[18px] h-[18px]" />
+                  </div>
+                  Calculator
+                </a>
+
+                <a
+                  href="/protocols"
+                  className="flex items-center gap-3 p-4 rounded-xl text-left font-medium text-charcoal-800 hover:bg-blush-50 transition-colors"
+                >
+                  <div className="p-2 rounded-lg bg-blush-50 text-rose-500">
+                    <FlaskConical className="w-[18px] h-[18px]" />
+                  </div>
+                  Protocols
+                </a>
 
                 <a
                   href="/track-order"

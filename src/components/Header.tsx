@@ -22,14 +22,15 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               onClick={() => { onMenuClick(); setMobileMenuOpen(false); }}
               className="flex items-center hover:opacity-90 transition-opacity"
             >
-              <div className="h-10 sm:h-12 flex items-center">
-                {/* Using text placeholder if image doesn't match new brand, otherwise keep image */}
-                {/* For now keeping image container but adding text fallback context mentally */}
+              <div className="h-10 sm:h-12 flex items-center gap-2">
                 <img
                   src="/rs-peptides-logo.png"
                   alt="RSPEPTIDE"
                   className="h-full w-auto object-contain"
                 />
+                <span className="text-base sm:text-lg font-bold text-science-blue-900">
+                  RS<span className="text-tech-teal">PEPTIDE</span>
+                </span>
               </div>
             </button>
 

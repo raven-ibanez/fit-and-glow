@@ -116,9 +116,29 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 lg:pt-16 lg:pb-32">
         <div className="max-w-2xl mx-auto text-center lg:text-left lg:mx-0">
 
+          {/* Logo with Circle Animation */}
+          <div
+            className={`mb-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}
+          >
+            <div className="relative inline-block mx-auto lg:mx-0">
+              {/* Rotating Ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-dashed border-tech-teal/40 animate-spin" style={{ animationDuration: '12s' }} />
+              {/* Pulse Ring */}
+              <div className="absolute inset-[-4px] rounded-full border-2 border-tech-teal/20 animate-pulse" />
+              {/* Logo Container */}
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white shadow-lg shadow-tech-teal/10 border border-gray-100 flex items-center justify-center overflow-hidden">
+                <img
+                  src="/rs-peptides-logo.png"
+                  alt="RSPEPTIDE"
+                  className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
           {/* Badge */}
           <div
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm border border-tech-teal/20 shadow-lg shadow-tech-teal/5 mb-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm border border-tech-teal/20 shadow-lg shadow-tech-teal/5 mb-6 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
             <Sparkles className="w-4 h-4 text-tech-teal animate-pulse" />
             <span className="text-xs font-bold text-science-blue-800 uppercase tracking-wider">Lab-Tested Excellence</span>
@@ -141,7 +161,7 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
 
           {/* CTA Buttons */}
           <div
-            className={`flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3 mb-10 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            className={`flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3 mb-4 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <button
               onClick={onShopAll}
@@ -161,6 +181,21 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
                 View Research Standards
               </a>
             )}
+          </div>
+
+          {/* Rush Order Contact */}
+          <div
+            className={`mb-6 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <a
+              href="https://m.me/61585973522665"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-tech-teal transition-colors"
+            >
+              <span className="w-2 h-2 bg-tech-teal rounded-full animate-pulse" />
+              For rush orders, please contact us
+            </a>
           </div>
 
         </div>

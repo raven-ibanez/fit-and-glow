@@ -48,14 +48,14 @@ const SubNav: React.FC<SubNavProps> = ({ selectedCategory, onCategoryClick }) =>
                   flex items-center space-x-2 px-5 py-2.5 rounded-lg font-bold whitespace-nowrap
                   transition-all duration-300 text-sm uppercase tracking-wider
                   ${isSelected
-                    ? 'bg-teal-500 text-white shadow-glow'
-                    : 'bg-gray-50 text-charcoal-500 hover:text-teal-500 hover:bg-teal-50 border border-gray-100'
+                    ? 'bg-blush-600 text-white shadow-glow'
+                    : 'bg-white text-charcoal-500 hover:text-blush-600 hover:bg-blush-50 border border-blush-100'
                   }
                 `}
               >
                 <span>
                   {React.cloneElement(iconMap[category.icon] || <Grid className="w-4 h-4" />, {
-                    className: `w-4 h-4 ${isSelected ? 'text-white' : 'text-teal-500'}`
+                    className: `w-4 h-4 ${isSelected ? 'text-white' : 'text-blush-500'}`
                   })}
                 </span>
                 <span>{category.name}</span>

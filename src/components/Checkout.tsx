@@ -32,13 +32,13 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
   // Payment
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
-  const [contactMethod, setContactMethod] = useState<'facebook' | 'instagram' | 'fb_business' | ''>('facebook');
+  const [contactMethod, setContactMethod] = useState<'viber' | 'whatsapp' | ''>('viber');
   const [notes, setNotes] = useState('');
 
   const [orderMessage, setOrderMessage] = useState<string>('');
   const [copied, setCopied] = useState(false);
   const [contactOpened, setContactOpened] = useState(false);
-  const [createdOrderId, setCreatedOrderId] = useState<string | null>(null);
+
   const [orderNumber, setOrderNumber] = useState<string>('');
 
   // Payment Proof
@@ -270,11 +270,10 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
       }
 
       console.log('✅ Order saved to database:', orderData);
-      setCreatedOrderId(orderData.id);
 
-      // Generate custom order number: RSPEP-XXXX (3-4 random digits)
+      // Generate custom order number: GWJ-XXXX (3-4 random digits)
       const randomDigits = Math.floor(Math.random() * 9000 + 1000); // 1000-9999
-      const customOrderNumber = `RSPEP-${randomDigits}`;
+      const customOrderNumber = `GWJ-${randomDigits}`;
       setOrderNumber(customOrderNumber);
 
       // Get current date and time
@@ -332,7 +331,7 @@ ${paymentMethod?.name || 'N/A'}
 ${paymentProofUrl ? 'Screenshot attached to order.' : 'Pending'}
 
 📱 CONTACT METHOD
-${contactMethod === 'facebook' ? 'Facebook Personal' : contactMethod === 'instagram' ? 'Instagram @betterthanbareaesthetics' : 'Facebook Business Page'}
+${contactMethod === 'viber' ? 'Viber (0998 974 7336)' : 'WhatsApp (0998 974 7336)'}
 
 📋 ORDER NUMBER: ${customOrderNumber}
 
@@ -347,32 +346,6 @@ Please confirm this order. Thank you!
         setCopied(true);
       } catch (err) {
         console.error('Failed to auto-copy:', err);
-      }
-
-      // Open contact method based on selection
-      const contactUrl = contactMethod === 'facebook'
-        ? 'https://www.facebook.com/share/1EMhRK2Q21/?mibextid=wwXIfr'
-        : contactMethod === 'instagram'
-          ? 'https://www.instagram.com/betterthanbareaesthetics'
-          : contactMethod === 'fb_business'
-            ? 'https://www.facebook.com/profile.php?id=100077030726813'
-            : null;
-
-      if (contactUrl) {
-        setTimeout(() => {
-          try {
-            const contactWindow = window.open(contactUrl, '_blank');
-            if (!contactWindow || contactWindow.closed || typeof contactWindow.closed === 'undefined') {
-              console.warn('⚠️ Popup blocked or contact method failed to open');
-              setContactOpened(false);
-            } else {
-              setContactOpened(true);
-            }
-          } catch (error) {
-            console.error('❌ Error opening contact method:', error);
-            setContactOpened(false);
-          }
-        }, 500);
       }
 
       // Show confirmation
@@ -396,16 +369,18 @@ Please confirm this order. Thank you!
   };
 
   const handleOpenContact = () => {
-    const contactUrl = contactMethod === 'facebook'
-      ? 'https://www.facebook.com/share/1EMhRK2Q21/?mibextid=wwXIfr'
-      : contactMethod === 'instagram'
-        ? 'https://www.instagram.com/betterthanbareaesthetics'
-        : contactMethod === 'fb_business'
-          ? 'https://www.facebook.com/profile.php?id=100077030726813'
-          : null;
+    const contactUrl = contactMethod === 'viber'
+      ? `viber://chat?number=%2B639989747336`
+      : contactMethod === 'whatsapp'
+        ? `https://wa.me/639989747336?text=${encodeURIComponent(orderMessage)}`
+        : null;
 
     if (contactUrl) {
-      window.open(contactUrl, '_blank');
+      if (contactMethod === 'viber') {
+        window.location.href = contactUrl;
+      } else {
+        window.open(contactUrl, '_blank');
+      }
     }
   };
 
@@ -421,7 +396,7 @@ Please confirm this order. Thank you!
               Order Confirmed
             </h1>
             <p className="text-gray-600 mb-4 text-base md:text-lg leading-relaxed">
-              Copy the order message below and send it via {contactMethod === 'facebook' ? 'Facebook' : contactMethod === 'instagram' ? 'Instagram' : 'Facebook Page'} along with your payment screenshot to finalize your order.
+              Copy the order message below and send it via {contactMethod === 'viber' ? 'Viber' : 'WhatsApp'} along with your payment screenshot to finalize your order.
             </p>
 
             {/* Order ID Display */}
@@ -479,12 +454,12 @@ Please confirm this order. Thank you!
                 className="w-full btn-primary py-4 text-base flex items-center justify-center gap-2 shadow-lg"
               >
                 <MessageCircle className="w-5 h-5" />
-                {contactMethod === 'facebook' ? 'Open Facebook' : contactMethod === 'instagram' ? 'Open Instagram' : 'Open FB Page'} & Send
+                {contactMethod === 'viber' ? 'Open Viber' : 'Open WhatsApp'} & Send
               </button>
 
               {!contactOpened && (
                 <p className="text-sm text-gray-500">
-                  If it doesn't open automatically, please manually send the copied message to <span className="font-bold">{contactMethod === 'facebook' ? 'Better Than Bare on Facebook' : contactMethod === 'instagram' ? '@betterthanbareaesthetics on Instagram' : 'Better Than Bare FB Page'}</span>
+                  If it doesn't open automatically, please manually send the copied message to <span className="font-bold">{contactMethod === 'viber' ? '0998 974 7336 on Viber' : '0998 974 7336 on WhatsApp'}</span>
                 </p>
               )}
             </div>
@@ -846,186 +821,168 @@ Please confirm this order. Thank you!
               <p className="text-xs text-gray-500 mb-4">
                 Choose how you'd like to send your order details after checkout.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {/* Facebook Personal */}
-                <button
-                  type="button"
-                  onClick={() => setContactMethod('facebook')}
-                  className={`p-4 rounded border transition-all flex items-center gap-3 ${contactMethod === 'facebook'
-                    ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
-                    : 'border-gray-200 hover:border-science-blue-300'
-                    }`}
-                >
-                  <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                  </svg>
-                  <div className="text-left">
-                    <p className="font-bold text-science-blue-900 text-sm">Facebook</p>
-                    <p className="text-xs text-gray-500">Personal</p>
-                  </div>
-                </button>
+              {/* Viber */}
+              <button
+                type="button"
+                onClick={() => setContactMethod('viber')}
+                className={`p-4 rounded border transition-all flex items-center gap-3 ${contactMethod === 'viber'
+                  ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
+                  : 'border-gray-200 hover:border-science-blue-300'
+                  }`}
+              >
+                <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M21.624 19.344C20.618 20.35 18.257 21.018 17.653 21.119C16.921 21.238 16.331 21.229 15.776 21.161C14.075 20.957 11.836 20.065 9.421 17.652C7.008 15.236 6.115 12.997 5.912 11.296C5.844 10.741 5.834 10.151 5.953 9.419C6.054 8.815 6.722 6.453 7.728 5.447C8.016 5.16 8.441 5.152 8.74 5.433C9.098 5.769 9.873 6.643 10.233 7.072C10.518 7.411 10.518 7.904 10.247 8.249C9.972 8.6 9.497 9.062 9.165 9.387C9.049 9.501 8.981 9.658 9.04 9.813C9.28 10.439 10.057 12.164 11.889 13.996C13.722 15.828 15.447 16.604 16.073 16.844C16.228 16.904 16.386 16.836 16.499 16.719C16.825 16.388 17.286 15.912 17.638 15.637C17.982 15.366 18.475 15.367 18.814 15.652C19.243 16.012 20.117 16.787 20.453 17.145C20.733 17.444 20.726 17.869 20.439 18.156L21.624 19.344Z" />
+                </svg>
+                <div className="text-left">
+                  <p className="font-bold text-science-blue-900 text-sm">Viber</p>
+                  <p className="text-xs text-gray-500">0998 974 7336</p>
+                </div>
+              </button>
 
-                {/* Instagram Business */}
-                <button
-                  type="button"
-                  onClick={() => setContactMethod('instagram')}
-                  className={`p-4 rounded border transition-all flex items-center gap-3 ${contactMethod === 'instagram'
-                    ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
-                    : 'border-gray-200 hover:border-science-blue-300'
-                    }`}
-                >
-                  <svg className="w-6 h-6 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              {/* WhatsApp */}
+              <button
+                type="button"
+                onClick={() => setContactMethod('whatsapp')}
+                className={`p-4 rounded border transition-all flex items-center gap-3 ${contactMethod === 'whatsapp'
+                  ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
+                  : 'border-gray-200 hover:border-science-blue-300'
+                  }`}
+              >
+                <div className="w-6 h-6 flex items-center justify-center bg-green-500 rounded-full text-white">
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                   </svg>
-                  <div className="text-left">
-                    <p className="font-bold text-science-blue-900 text-sm">Instagram</p>
-                    <p className="text-xs text-gray-500">Business</p>
-                  </div>
-                </button>
-
-                {/* Facebook Business Page */}
-                <button
-                  type="button"
-                  onClick={() => setContactMethod('fb_business')}
-                  className={`p-4 rounded border transition-all flex items-center gap-3 ${contactMethod === 'fb_business'
-                    ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
-                    : 'border-gray-200 hover:border-science-blue-300'
-                    }`}
-                >
-                  <svg className="w-6 h-6 text-blue-700" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                  </svg>
-                  <div className="text-left">
-                    <p className="font-bold text-science-blue-900 text-sm">FB Page</p>
-                    <p className="text-xs text-gray-500">Business</p>
-                  </div>
-                </button>
-              </div>
+                </div>
+                <div className="text-left">
+                  <p className="font-bold text-science-blue-900 text-sm">WhatsApp</p>
+                  <p className="text-xs text-gray-500">0998 974 7336</p>
+                </div>
+              </button>
             </div>
-
-            {/* Shipping Location Selection */}
-            <div className="bg-white rounded shadow-clinical p-6 border border-gray-100">
-              <h2 className="font-heading text-lg font-bold text-science-blue-900 mb-3 flex items-center gap-2">
-                Choose Shipping Region *
-              </h2>
-              <p className="text-xs text-gray-500 mb-6 bg-blue-50 p-3 rounded border border-blue-100">
-                Small pouch standard shipping (up to 3 pens). For bulk orders, manual adjustment may apply.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {shippingLocations.map((loc) => (
-                  <button
-                    key={loc.id}
-                    onClick={() => setShippingLocation(loc.id as 'LUZON' | 'VISAYAS' | 'MINDANAO' | 'MAXIM')}
-                    className={`p-4 rounded border transition-all text-left ${shippingLocation === loc.id
-                      ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
-                      : 'border-gray-200 hover:border-science-blue-300'
-                      }`}
-                  >
-                    <p className="font-bold text-science-blue-900 text-sm mb-1">{loc.name || loc.id.replace('_', ' & ')}</p>
-                    <p className="text-xs text-tech-teal font-medium">{hasTirzepatide ? 'FREE' : `₱${loc.fee}`}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <button
-              onClick={handleProceedToPayment}
-              disabled={!isDetailsValid}
-              className={`w-full py-4 rounded font-bold text-base transition-all transform shadow-md ${isDetailsValid
-                ? 'btn-primary hover:scale-[1.01]'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                }`}
-            >
-              Proceed to Payment
-            </button>
           </div>
 
-          {/* Order Summary Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded shadow-clinical p-6 sticky top-24 border border-gray-100">
-              <h2 className="font-heading text-lg font-bold text-science-blue-900 mb-6 flex items-center gap-2">
-                Order Summary
-                <Activity className="w-4 h-4 text-tech-teal" />
-              </h2>
-
-              <div className="space-y-4 mb-6">
-                {cartItems.map((item, index) => (
-                  <div key={index} className="pb-4 border-b border-gray-100">
-                    <div className="flex justify-between items-start mb-1">
-                      <div className="flex-1">
-                        <h4 className="font-bold text-science-blue-900 text-sm">{item.product.name}</h4>
-                        {item.variation && (
-                          <p className="text-xs text-gray-600 mt-0.5">{item.variation.name}</p>
-                        )}
-                      </div>
-                      <span className="font-bold text-science-blue-900 text-sm">
-                        ₱{(item.price * item.quantity).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
-                      </span>
-                    </div>
-                    <p className="text-xs text-gray-400">Qty: {item.quantity}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Promo Code */}
-              <div className="mb-6 pt-2">
-                <p className="text-xs font-bold text-science-blue-700 uppercase mb-2 flex items-center gap-1">
-                  <Tag className="w-3 h-3" /> Promo Code
-                </p>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={promoCode}
-                    onChange={(e) => setPromoCode(e.target.value)}
-                    placeholder="ENTER CODE"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:ring-1 focus:ring-science-blue-500 focus:border-science-blue-500 outline-none uppercase"
-                    disabled={!!appliedPromo || isApplyingPromo}
-                  />
-                  {appliedPromo ? (
-                    <button
-                      onClick={() => {
-                        setAppliedPromo(null);
-                        setDiscountAmount(0);
-                        setPromoCode('');
-                        setPromoSuccess('');
-                      }}
-                      className="px-3 py-2 bg-red-50 text-red-600 rounded text-xs font-bold border border-red-100 hover:bg-red-100"
-                    >
-                      REMOVE
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleApplyPromoCode}
-                      disabled={!promoCode || isApplyingPromo}
-                      className="px-3 py-2 bg-science-blue-600 text-white rounded text-xs font-bold hover:bg-science-blue-700 disabled:opacity-50"
-                    >
-                      APPLY
-                    </button>
-                  )}
-                </div>
-                {promoError && <p className="text-red-500 text-xs mt-1">{promoError}</p>}
-                {promoSuccess && <p className="text-bio-green text-xs mt-1 font-medium">{promoSuccess}</p>}
-              </div>
-
-              <div className="space-y-2 text-sm text-gray-600 border-t border-gray-100 pt-4">
-                <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span>₱{totalPrice.toLocaleString()}</span>
-                </div>
-                {discountAmount > 0 && (
-                  <div className="flex justify-between text-bio-green font-medium">
-                    <span>Discount</span>
-                    <span>-₱{discountAmount.toLocaleString()}</span>
-                  </div>
-                )}
-                <div className="flex justify-between font-bold text-science-blue-900 text-base pt-2">
-                  <span>Total Estimate</span>
-                  <span>₱{Math.max(0, totalPrice - discountAmount).toLocaleString()}</span>
-                </div>
-                <p className="text-xs text-gray-400 text-right italic">+ Shipping fee added at payment</p>
-              </div>
-
+          {/* Shipping Location Selection */}
+          <div className="bg-white rounded shadow-clinical p-6 border border-gray-100">
+            <h2 className="font-heading text-lg font-bold text-science-blue-900 mb-3 flex items-center gap-2">
+              Choose Shipping Region *
+            </h2>
+            <p className="text-xs text-gray-500 mb-6 bg-blue-50 p-3 rounded border border-blue-100">
+              Small pouch standard shipping (up to 3 pens). For bulk orders, manual adjustment may apply.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {shippingLocations.map((loc) => (
+                <button
+                  key={loc.id}
+                  onClick={() => setShippingLocation(loc.id as 'LUZON' | 'VISAYAS' | 'MINDANAO' | 'MAXIM')}
+                  className={`p-4 rounded border transition-all text-left ${shippingLocation === loc.id
+                    ? 'border-science-blue-600 bg-clinical-blue ring-1 ring-science-blue-600'
+                    : 'border-gray-200 hover:border-science-blue-300'
+                    }`}
+                >
+                  <p className="font-bold text-science-blue-900 text-sm mb-1">{loc.name || loc.id.replace('_', ' & ')}</p>
+                  <p className="text-xs text-tech-teal font-medium">{hasTirzepatide ? 'FREE' : `₱${loc.fee}`}</p>
+                </button>
+              ))}
             </div>
+          </div>
+
+          <button
+            onClick={handleProceedToPayment}
+            disabled={!isDetailsValid}
+            className={`w-full py-4 rounded font-bold text-base transition-all transform shadow-md ${isDetailsValid
+              ? 'btn-primary hover:scale-[1.01]'
+              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+          >
+            Proceed to Payment
+          </button>
+        </div>
+
+        {/* Order Summary Sidebar */}
+        <div className="lg:col-span-1">
+          <div className="bg-white rounded shadow-clinical p-6 sticky top-24 border border-gray-100">
+            <h2 className="font-heading text-lg font-bold text-science-blue-900 mb-6 flex items-center gap-2">
+              Order Summary
+              <Activity className="w-4 h-4 text-tech-teal" />
+            </h2>
+
+            <div className="space-y-4 mb-6">
+              {cartItems.map((item, index) => (
+                <div key={index} className="pb-4 border-b border-gray-100">
+                  <div className="flex justify-between items-start mb-1">
+                    <div className="flex-1">
+                      <h4 className="font-bold text-science-blue-900 text-sm">{item.product.name}</h4>
+                      {item.variation && (
+                        <p className="text-xs text-gray-600 mt-0.5">{item.variation.name}</p>
+                      )}
+                    </div>
+                    <span className="font-bold text-science-blue-900 text-sm">
+                      ₱{(item.price * item.quantity).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400">Qty: {item.quantity}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Promo Code */}
+            <div className="mb-6 pt-2">
+              <p className="text-xs font-bold text-science-blue-700 uppercase mb-2 flex items-center gap-1">
+                <Tag className="w-3 h-3" /> Promo Code
+              </p>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  placeholder="ENTER CODE"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:ring-1 focus:ring-science-blue-500 focus:border-science-blue-500 outline-none uppercase"
+                  disabled={!!appliedPromo || isApplyingPromo}
+                />
+                {appliedPromo ? (
+                  <button
+                    onClick={() => {
+                      setAppliedPromo(null);
+                      setDiscountAmount(0);
+                      setPromoCode('');
+                      setPromoSuccess('');
+                    }}
+                    className="px-3 py-2 bg-red-50 text-red-600 rounded text-xs font-bold border border-red-100 hover:bg-red-100"
+                  >
+                    REMOVE
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleApplyPromoCode}
+                    disabled={!promoCode || isApplyingPromo}
+                    className="px-3 py-2 bg-science-blue-600 text-white rounded text-xs font-bold hover:bg-science-blue-700 disabled:opacity-50"
+                  >
+                    APPLY
+                  </button>
+                )}
+              </div>
+              {promoError && <p className="text-red-500 text-xs mt-1">{promoError}</p>}
+              {promoSuccess && <p className="text-bio-green text-xs mt-1 font-medium">{promoSuccess}</p>}
+            </div>
+
+            <div className="space-y-2 text-sm text-gray-600 border-t border-gray-100 pt-4">
+              <div className="flex justify-between">
+                <span>Subtotal</span>
+                <span>₱{totalPrice.toLocaleString()}</span>
+              </div>
+              {discountAmount > 0 && (
+                <div className="flex justify-between text-bio-green font-medium">
+                  <span>Discount</span>
+                  <span>-₱{discountAmount.toLocaleString()}</span>
+                </div>
+              )}
+              <div className="flex justify-between font-bold text-science-blue-900 text-base pt-2">
+                <span>Total Estimate</span>
+                <span>₱{Math.max(0, totalPrice - discountAmount).toLocaleString()}</span>
+              </div>
+              <p className="text-xs text-gray-400 text-right italic">+ Shipping fee added at payment</p>
+            </div>
+
           </div>
         </div>
       </div>

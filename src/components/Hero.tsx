@@ -13,124 +13,102 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
   }, []);
 
   return (
-    <div className="relative min-h-[85vh] lg:min-h-[90vh] overflow-hidden grain-overlay">
+    <div className="relative min-h-[90vh] overflow-hidden grain-overlay flex items-center justify-center">
 
-      {/* Soft Blush Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FADADD] via-[#FDF5F7] to-white" />
+      {/* Modern Gradient Background - Refined */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#F5E6FA] to-[#EDE9FE]" />
 
-      {/* Subtle Floating Shapes */}
+      {/* Abstract Shapes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Large soft blob - top right */}
+        {/* Top Right Blob */}
         <div
-          className="absolute -top-20 -right-20 w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] rounded-full opacity-30"
-          style={{
-            background: 'radial-gradient(circle, rgba(248,200,216,0.6) 0%, rgba(248,200,216,0) 70%)',
-          }}
+          className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] rounded-full blur-3xl opacity-30 animate-pulse"
+          style={{ background: 'radial-gradient(circle, #C4B5FD 0%, transparent 70%)', animationDuration: '8s' }}
         />
-        {/* Medium blob - bottom left */}
+        {/* Bottom Left Blob */}
         <div
-          className="absolute -bottom-32 -left-32 w-[350px] h-[350px] lg:w-[500px] lg:h-[500px] rounded-full opacity-25"
-          style={{
-            background: 'radial-gradient(circle, rgba(232,164,184,0.5) 0%, rgba(232,164,184,0) 70%)',
-          }}
-        />
-        {/* Small accent blob - center */}
-        <div
-          className="absolute top-1/2 left-1/3 w-[200px] h-[200px] rounded-full opacity-20 hidden lg:block"
-          style={{
-            background: 'radial-gradient(circle, rgba(248,200,216,0.4) 0%, transparent 70%)',
-          }}
+          className="absolute -bottom-[10%] -left-[10%] w-[600px] h-[600px] rounded-full blur-3xl opacity-20 animate-pulse"
+          style={{ background: 'radial-gradient(circle, #1ABC9C 0%, transparent 70%)', animationDuration: '10s' }}
         />
       </div>
 
-      {/* Main Content - Centered */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* Main Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 flex flex-col items-center">
 
-          {/* Logo */}
-          <div
-            className={`mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-          >
+        {/* Glass Card Container for Content Consistency */}
+        <div className={`
+          relative backdrop-blur-md bg-white/40 border border-white/60 rounded-[2rem] shadow-xl 
+          p-8 md:p-12 lg:p-16 max-w-4xl w-full text-center
+          transition-all duration-1000 ease-out transform
+          ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}
+        `}>
+
+          {/* Decorative Sparkle */}
+          <div className="absolute -top-6 -right-6 hidden md:block animate-bounce" style={{ animationDuration: '3s' }}>
+            <Sparkles className="w-12 h-12 text-blush-400 opacity-80" />
+          </div>
+
+          {/* Logo Brand */}
+          <div className="mb-8 md:mb-10">
             <img
-              src="/btb-logo.png"
-              alt="Better Than Bare"
-              className="h-20 sm:h-24 md:h-28 w-auto mx-auto object-contain"
+              src="/glow-logo.jpg"
+              alt="Glow with Joo"
+              className="h-24 md:h-32 w-auto mx-auto object-contain drop-shadow-md rounded-xl"
             />
           </div>
 
-          {/* Elegant Badge */}
-          <div
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-blush-200 shadow-soft mb-8 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-          >
-            <FlaskConical className="w-4 h-4 text-rose-500" />
-            <span className="text-xs font-medium text-charcoal-700 uppercase tracking-widest">Research-Grade Peptides</span>
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-white shadow-sm mb-6">
+            <FlaskConical className="w-3.5 h-3.5 text-blush-600" />
+            <span className="text-xs font-bold text-charcoal-600 tracking-widest uppercase">Premium Grade • Lab Tested</span>
           </div>
 
-          {/* Subheadline */}
-          <p
-            className={`font-sans text-lg sm:text-xl text-charcoal-600 font-light tracking-wide mb-4 transition-all duration-700 delay-150 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          >
-            Premium Peptide Solutions
+          {/* Main Headline */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-charcoal-900 mb-6 leading-tight tracking-tight drop-shadow-sm">
+            Reject Average. <br className="hidden md:block" />
+            <span className="text-blush-600">
+              Reveal Your Radiance.
+            </span>
+          </h1>
+
+          {/* Subheading */}
+          <p className="text-lg md:text-xl text-charcoal-600 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+            Elevate your wellness with premium, high-purity peptides designed for results you can see and feel.
           </p>
 
-          {/* Supporting Line */}
-          <p
-            className={`text-base sm:text-lg text-charcoal-500 max-w-lg mx-auto mb-10 leading-relaxed transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          >
-            Elevate your wellness journey with lab-tested, high-purity peptides you can trust.
-          </p>
-
-          {/* CTA Buttons */}
-          <div
-            className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          >
-            {/* Primary CTA */}
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
             <button
               onClick={onShopAll}
-              className="w-full sm:w-auto group px-10 py-4 bg-blush-500 text-white font-semibold rounded-2xl shadow-luxury hover:bg-blush-600 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto min-w-[200px] px-8 py-4 bg-blush-600 hover:bg-blush-700 text-white font-semibold rounded-full shadow-lg hover:shadow-blush-300/50 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
-              <span>Explore Products</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              Start Your Journey
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
-            {/* Secondary CTA */}
-            <a
-              href="/faq"
-              className="w-full sm:w-auto px-10 py-4 bg-transparent text-rose-600 font-semibold rounded-2xl border-2 border-rose-300 hover:bg-rose-50 hover:border-rose-400 transition-all duration-300 text-center"
-            >
-              Learn More
-            </a>
+
           </div>
 
-          {/* Brand Summary */}
-          <p
-            className={`text-sm text-charcoal-400 italic font-serif transition-all duration-700 delay-400 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          >
-            Quality peptides, exceptional results.
-          </p>
-
         </div>
-      </div>
 
-      {/* Trust Bar */}
-      <div
-        className={`absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm border-t border-blush-100 py-5 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:gap-x-12">
-            {[
-              { icon: FlaskConical, label: 'Lab Tested' },
-              { icon: Shield, label: 'High Purity' },
-              { icon: Sparkles, label: 'Premium Quality' },
-              { icon: Award, label: 'Trusted' }
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-charcoal-600">
-                <item.icon className="w-4 h-4 text-rose-400" />
-                <span className="text-xs sm:text-sm font-medium tracking-wide">{item.label}</span>
-              </div>
-            ))}
-          </div>
+        {/* Trust Indicators - Floating Below */}
+        <div className={`
+          mt-12 flex flex-wrap justify-center gap-4 md:gap-8 
+          transition-all duration-1000 delay-300 ease-out
+          ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+        `}>
+          {[
+            { icon: Shield, label: '99% Purity Guaranteed' },
+            { icon: FlaskConical, label: 'Third-Party Lab Tested' },
+            { icon: Award, label: 'Premium Grade Source' },
+          ].map((item, idx) => (
+            <div key={idx} className="flex items-center gap-2 px-5 py-2.5 bg-white/60 backdrop-blur-sm rounded-full border border-white/40 shadow-sm text-sm font-medium text-charcoal-600">
+              <item.icon className="w-4 h-4 text-blush-500" />
+              {item.label}
+            </div>
+          ))}
         </div>
+
       </div>
     </div>
   );

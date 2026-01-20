@@ -43,26 +43,17 @@ const ProtocolGuide: React.FC = () => {
                 <div className="text-center mb-10">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-blush-200 shadow-soft mb-4">
                         <BookOpen className="w-4 h-4 text-rose-500" />
-                        <span className="text-xs font-medium text-charcoal-700 uppercase tracking-widest">Research Guide</span>
+                        <span className="text-xs font-medium text-charcoal-700 uppercase tracking-widest">Protocol Guide</span>
                     </div>
                     <h1 className="font-heading text-3xl sm:text-4xl font-bold text-charcoal-900 mb-3">
                         Peptide Protocol Guide
                     </h1>
                     <p className="text-charcoal-600 max-w-2xl mx-auto">
-                        General dosage guidelines and protocols for research peptides. Always consult with a healthcare professional before use.
+                        General dosage guidelines and protocols for peptides. Always consult with a healthcare professional before use.
                     </p>
                 </div>
 
-                {/* Disclaimer */}
-                <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-8 flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                        <p className="text-sm text-amber-800 font-medium">Research Use Only</p>
-                        <p className="text-xs text-amber-700 mt-1">
-                            This information is for educational purposes only. Peptides are sold strictly for research purposes. Not intended for human consumption.
-                        </p>
-                    </div>
-                </div>
+
 
                 {/* General Guidelines */}
                 <div className="bg-white rounded-2xl shadow-soft border border-blush-100 p-6 mb-8">

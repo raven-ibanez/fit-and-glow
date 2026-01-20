@@ -63,7 +63,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
   const decrementQuantity = () => setQuantity(prev => prev > 1 ? prev - 1 : 1);
 
   return (
-    <div className="bg-white h-full flex flex-col group relative border border-gray-100 rounded shadow-sm hover:border-science-blue-200 transition-all duration-300 hover:shadow-clinical">
+    <div className="bg-white h-full flex flex-col group relative border border-gray-100 rounded shadow-sm hover:border-blush-200 transition-all duration-300 hover:shadow-clinical">
       {/* Click overlay for product details */}
       <div
         onClick={() => onProductClick?.(product)}
@@ -80,7 +80,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-300 bg-clinical-blue/30">
+          <div className="w-full h-full flex items-center justify-center text-gray-300 bg-blush-50/50">
             <Package className="w-16 h-16 opacity-50" />
           </div>
         )}
@@ -88,12 +88,12 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2 pointer-events-none z-20">
           {product.featured && (
-            <span className="px-2 py-1 bg-tech-teal text-white text-[10px] font-bold uppercase tracking-wider rounded shadow-sm">
+            <span className="px-2 py-1 bg-blush-600 text-white text-[10px] font-bold uppercase tracking-wider rounded shadow-sm">
               Featured
             </span>
           )}
           {hasDiscount && (
-            <span className="px-2 py-1 bg-bio-green text-white text-[10px] font-bold rounded shadow-sm">
+            <span className="px-2 py-1 bg-glow-teal-600 text-white text-[10px] font-bold rounded shadow-sm">
               {Math.round((1 - currentPrice / originalPrice) * 100)}% OFF
             </span>
           )}
@@ -111,7 +111,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
       {/* Product Details */}
       <div className="p-2.5 sm:p-4 flex-1 flex flex-col">
-        <h3 className="font-heading font-bold text-science-blue-900 text-xs sm:text-base mb-0.5 sm:mb-1 line-clamp-2 tracking-tight">
+        <h3 className="font-heading font-bold text-blush-900 text-xs sm:text-base mb-0.5 sm:mb-1 line-clamp-2 tracking-tight">
           {product.name}
         </h3>
         <p className="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3 line-clamp-2 min-h-[1.5rem] sm:min-h-[2.5rem] leading-relaxed">
@@ -137,10 +137,10 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                     className={`
                       px-1.5 sm:px-2 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-medium rounded border transition-all duration-200 relative z-20
                       ${selectedVariation?.id === variation.id && !isOutOfStock
-                        ? 'bg-science-blue-50 border-science-blue-500 text-science-blue-700'
+                        ? 'bg-blush-50 border-blush-500 text-blush-900'
                         : isOutOfStock
                           ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed'
-                          : 'bg-white text-gray-600 border-gray-200 hover:border-science-blue-300 hover:text-science-blue-600'
+                          : 'bg-white text-gray-600 border-gray-200 hover:border-blush-300 hover:text-blush-600'
                       }
                     `}
                   >
@@ -163,7 +163,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
         <div className="flex flex-col gap-2 sm:gap-3 mt-auto">
           {hasDiscount ? (
             <div className="flex items-baseline gap-1 sm:gap-2">
-              <span className="text-sm sm:text-lg font-bold text-science-blue-900">
+              <span className="text-sm sm:text-lg font-bold text-blush-900">
                 ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
               </span>
               <span className="text-[10px] sm:text-xs text-gray-400 line-through">
@@ -172,7 +172,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
             </div>
           ) : (
             <div className="flex items-baseline">
-              <span className="text-sm sm:text-lg font-bold text-science-blue-900">
+              <span className="text-sm sm:text-lg font-bold text-blush-900">
                 ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
               </span>
             </div>
@@ -191,7 +191,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
               >
                 <Minus className="w-3 h-3" />
               </button>
-              <span className="w-6 sm:w-8 text-center text-[10px] sm:text-xs font-bold text-science-blue-900">
+              <span className="w-6 sm:w-8 text-center text-[10px] sm:text-xs font-bold text-blush-900">
                 {quantity}
               </span>
               <button

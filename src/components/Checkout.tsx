@@ -297,7 +297,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
             });
 
             const orderDetails = `
-✨ BETTER THAN BARE - NEW ORDER
+✨ GLOW WITH JOO - NEW ORDER
 
 📅 ORDER DATE & TIME
 ${dateTimeStamp}

@@ -42,15 +42,15 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
     <div className="fixed inset-0 bg-science-blue-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4 overflow-y-auto">
       <div className="bg-white rounded sm:rounded shadow-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden my-2 sm:my-8 border border-gray-100">
         {/* Header */}
-        <div className="bg-science-blue-900 text-white p-3 sm:p-4 md:p-6 relative border-b border-science-blue-800">
+        <div className="bg-white text-charcoal-900 p-3 sm:p-4 md:p-6 relative border-b border-gray-100">
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 p-1.5 sm:p-2 hover:bg-white/10 rounded transition-colors text-white/80 hover:text-white"
+            className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 p-1.5 sm:p-2 hover:bg-gray-100 rounded transition-colors text-gray-400 hover:text-gray-600"
           >
             <X className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
           </button>
           <div className="pr-10 sm:pr-12">
-            <h2 className="font-heading text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1.5 sm:mb-2 text-white tracking-tight">{product.name}</h2>
+            <h2 className="font-heading text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1.5 sm:mb-2 text-blush-900 tracking-tight">{product.name}</h2>
             <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-wrap">
               {showPurity && (
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] sm:text-xs font-semibold bg-tech-teal/20 border border-tech-teal/30 text-tech-teal-light">
@@ -59,7 +59,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                 </span>
               )}
               {product.featured && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] sm:text-xs font-semibold bg-science-blue-700 border border-science-blue-600 text-white">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] sm:text-xs font-semibold bg-blush-600 border border-blush-500 text-white">
                   Featured
                 </span>
               )}
@@ -79,7 +79,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
             <div className="space-y-3 sm:space-y-4 md:space-y-6">
               {/* Product Image */}
               {product.image_url && (
-                <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 bg-secondary-50 rounded overflow-hidden border border-gray-100 shadow-inner">
+                <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 bg-gray-50 rounded overflow-hidden border border-gray-100 shadow-inner">
                   <img
                     src={product.image_url}
                     alt={product.name}
@@ -90,8 +90,8 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
               {/* Description */}
               <div>
-                <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-science-blue-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
-                  <Beaker className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-tech-teal" />
+                <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-blush-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
+                  <Beaker className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-glow-teal-600" />
                   Product Description
                 </h3>
                 <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed font-sans">{product.description}</p>
@@ -99,9 +99,9 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
               {/* Complete Set Inclusions */}
               {product.inclusions && product.inclusions.length > 0 && (
-                <div className="bg-clinical-blue rounded p-3 sm:p-4 border border-science-blue-100">
-                  <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-science-blue-900 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
-                    <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-tech-teal" />
+                <div className="bg-blush-50 rounded p-3 sm:p-4 border border-blush-100">
+                  <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-blush-900 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
+                    <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-glow-teal-600" />
                     Kit Inclusions
                   </h3>
                   <ul className="space-y-1.5 sm:space-y-2">
@@ -117,15 +117,15 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
               {/* Scientific Details */}
               <div className="bg-gray-50 rounded p-3 sm:p-4 border border-gray-200">
-                <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-science-blue-900 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
-                  <Beaker className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-tech-teal" />
+                <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-blush-900 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
+                  <Beaker className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-glow-teal-600" />
                   Technical Specifications
                 </h3>
                 <div className="space-y-1.5 sm:space-y-2">
                   {showPurity && (
                     <div className="flex justify-between">
                       <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm">Purity Analysis:</span>
-                      <span className="font-semibold text-science-blue-700 text-[11px] sm:text-xs md:text-sm">{product.purity_percentage}% (HPLC Verified)</span>
+                      <span className="font-semibold text-blush-700 text-[11px] sm:text-xs md:text-sm">{product.purity_percentage}% (HPLC Verified)</span>
                     </div>
                   )}
                   <div className="flex justify-between">
@@ -166,7 +166,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                         </span>
                       </div>
                       {/* Sale Price */}
-                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-science-blue-900 mb-2">
+                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blush-900 mb-2">
                         ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                       </div>
                       <div className="inline-block bg-bio-green-light text-bio-green-700 px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 md:py-1 rounded text-[10px] sm:text-xs md:text-sm font-bold border border-bio-green-200">
@@ -174,7 +174,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                       </div>
                     </>
                   ) : (
-                    <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-science-blue-900">
+                    <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-blush-900">
                       ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                     </div>
                   )}
@@ -202,8 +202,8 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                             className={`
                                 p-3 rounded border text-sm text-left transition-all
                                 ${isSelected
-                                ? 'border-science-blue-500 bg-science-blue-50 text-science-blue-900 ring-1 ring-science-blue-500'
-                                : 'border-gray-200 hover:border-science-blue-300 text-gray-700 bg-white'
+                                ? 'border-blush-500 bg-blush-50 text-blush-900 ring-1 ring-blush-500'
+                                : 'border-gray-200 hover:border-blush-300 text-gray-700 bg-white'
                               }
                                 ${isOutOfStock ? 'opacity-50 cursor-not-allowed bg-gray-50' : ''}
                               `}
@@ -236,7 +236,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                     >
                       <Minus className="w-5 h-5" />
                     </button>
-                    <span className="text-xl sm:text-2xl font-bold text-science-blue-900 min-w-[50px] text-center">
+                    <span className="text-xl sm:text-2xl font-bold text-blush-900 min-w-[50px] text-center">
                       {quantity}
                     </span>
                     <button
@@ -253,7 +253,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                 <div className="bg-gray-50 rounded p-3 mb-4 border border-gray-100">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-500 font-medium text-sm">Total Estimate:</span>
-                    <span className="text-xl font-bold text-science-blue-900">
+                    <span className="text-xl font-bold text-blush-900">
                       ₱{(currentPrice * quantity).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                     </span>
                   </div>

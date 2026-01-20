@@ -1,4 +1,4 @@
-import React from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useCart } from './hooks/useCart';
 import Header from './components/Header';
@@ -8,21 +8,24 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import FloatingCartButton from './components/FloatingCartButton';
 import Footer from './components/Footer';
-import AdminDashboard from './components/AdminDashboard';
-import COA from './components/COA';
-import FAQ from './components/FAQ';
-import PeptideCalculator from './components/PeptideCalculator';
-import OrderTracking from './components/OrderTracking';
-import ProtocolGuide from './components/ProtocolGuide';
-// Peptalk components removed
+import LoadingSpinner from './components/LoadingSpinner';
+
+// Lazy load route components
+const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
+const COA = lazy(() => import('./components/COA'));
+const FAQ = lazy(() => import('./components/FAQ'));
+const PeptideCalculator = lazy(() => import('./components/PeptideCalculator'));
+const OrderTracking = lazy(() => import('./components/OrderTracking'));
+const ProtocolGuide = lazy(() => import('./components/ProtocolGuide'));
+
 import { useMenu } from './hooks/useMenu';
 // import { useCOAPageSetting } from './hooks/useCOAPageSetting';
 
 function MainApp() {
     const cart = useCart();
     const { menuItems, refreshProducts } = useMenu();
-    const [currentView, setCurrentView] = React.useState<'menu' | 'cart' | 'checkout'>('menu');
-    const [selectedCategory, setSelectedCategory] = React.useState<string>('all');
+    const [currentView, setCurrentView] = useState<'menu' | 'cart' | 'checkout'>('menu');
+    const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
     const handleViewChange = (view: 'menu' | 'cart' | 'checkout') => {
         setCurrentView(view);
@@ -101,16 +104,18 @@ function App() {
 
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<MainApp />} />
-                <Route path="/coa" element={<COA />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/calculator" element={<PeptideCalculator />} />
-                <Route path="/track-order" element={<OrderTracking />} />
-                <Route path="/protocols" element={<ProtocolGuide />} />
-                {/* Peptalk routes removed */}
-                <Route path="/admin" element={<AdminDashboard />} />
-            </Routes>
+            <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
+                    <Route path="/" element={<MainApp />} />
+                    <Route path="/coa" element={<COA />} />
+                    <Route path="/faq" element={<FAQ />} />
+                    <Route path="/calculator" element={<PeptideCalculator />} />
+                    <Route path="/track-order" element={<OrderTracking />} />
+                    <Route path="/protocols" element={<ProtocolGuide />} />
+                    {/* Peptalk routes removed */}
+                    <Route path="/admin" element={<AdminDashboard />} />
+                </Routes>
+            </Suspense>
         </Router>
     );
 }

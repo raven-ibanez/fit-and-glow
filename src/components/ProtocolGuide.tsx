@@ -9,6 +9,7 @@ const ProtocolGuide: React.FC = () => {
     const { cartItems } = useCart();
     const { protocols, loading } = useProtocols();
     const [expandedProtocol, setExpandedProtocol] = useState<string | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
     const toggleProtocol = (id: string) => {
         setExpandedProtocol(expandedProtocol === id ? null : id);
@@ -19,8 +20,15 @@ const ProtocolGuide: React.FC = () => {
     };
 
     // Filter only active protocols
-    // const activeProtocols = protocols.filter(p => p.active);
-    const activeProtocols: any[] = []; // Forced empty as per user request
+    const activeProtocols = protocols.filter(p => p.active);
+
+    // Get unique categories
+    const categories = ['all', ...Array.from(new Set(activeProtocols.map(p => p.category)))];
+
+    // Filter by selected category
+    const filteredProtocols = selectedCategory === 'all'
+        ? activeProtocols
+        : activeProtocols.filter(p => p.category === selectedCategory);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#FADADD] via-[#FDF5F7] to-white">
@@ -106,17 +114,34 @@ const ProtocolGuide: React.FC = () => {
                     Peptide Protocols
                 </h2>
 
+                {/* Category Filter Dropdown */}
+                <div className="mb-6">
+                    <label className="block text-sm font-medium text-charcoal-600 mb-2">Filter by Category</label>
+                    <select
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                        className="w-full sm:w-64 px-4 py-3 rounded-xl bg-white border border-blush-200 text-charcoal-800 font-medium shadow-soft focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all cursor-pointer"
+                    >
+                        {categories.map((category) => (
+                            <option key={category} value={category}>
+                                {category === 'all' ? '📋 All Categories' : category}
+                            </option>
+                        ))}
+                    </select>
+                    <p className="text-xs text-charcoal-500 mt-1">{filteredProtocols.length} protocol(s) found</p>
+                </div>
+
                 {loading ? (
                     <div className="flex items-center justify-center py-12">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-500"></div>
                     </div>
-                ) : activeProtocols.length === 0 ? (
+                ) : filteredProtocols.length === 0 ? (
                     <div className="bg-white rounded-2xl shadow-soft border border-blush-100 p-8 text-center">
-                        <p className="text-charcoal-500">No protocols available yet. Check back soon!</p>
+                        <p className="text-charcoal-500">No protocols found in this category.</p>
                     </div>
                 ) : (
                     <div className="space-y-4">
-                        {activeProtocols.map((protocol) => (
+                        {filteredProtocols.map((protocol) => (
                             <div
                                 key={protocol.id}
                                 className="bg-white rounded-2xl shadow-soft border border-blush-100 overflow-hidden"

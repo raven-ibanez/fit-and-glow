@@ -3,6 +3,8 @@ import { Plus, Edit, Trash2, Save, X, ArrowLeft, TrendingUp, Package, Users, Fol
 import type { Product } from '../types';
 import { useMenu } from '../hooks/useMenu';
 import { useCategories } from '../hooks/useCategories';
+import { useProtocols } from '../hooks/useProtocols';
+import { generateProtocolFromTemplate } from '../lib/protocolTemplates';
 import ImageUpload from './ImageUpload';
 import CategoryManager from './CategoryManager';
 import PaymentMethodManager from './PaymentMethodManager';
@@ -32,6 +34,7 @@ const AdminDashboard: React.FC = () => {
   const [managingVariationsProductId, setManagingVariationsProductId] = useState<string | null>(null);
   const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const { addProtocol, protocols } = useProtocols();
 
   const variationManagerProduct = managingVariationsProductId
     ? products.find((product) => product.id === managingVariationsProductId) || null
@@ -63,6 +66,8 @@ const AdminDashboard: React.FC = () => {
     inclusions: null
   });
   const [inclusionsText, setInclusionsText] = useState('');
+  const [autoGenerateProtocol, setAutoGenerateProtocol] = useState(false);
+
 
   const handleAddProduct = () => {
     setCurrentView('add');
@@ -87,6 +92,7 @@ const AdminDashboard: React.FC = () => {
       inclusions: null
     });
     setInclusionsText('');
+    setAutoGenerateProtocol(true); // Default to true for new products
   };
 
   const handleEditProduct = (product: Product) => {
@@ -284,6 +290,32 @@ const AdminDashboard: React.FC = () => {
         console.log('✅ Product updated successfully', {
           saved_image_url: result.data?.image_url
         });
+
+        // Generate protocol when editing if checkbox is checked
+        if (autoGenerateProtocol && result.data) {
+          try {
+            console.log('📋 Generating protocol from template...');
+            // Convert category ID to display name for template matching
+            const categoryName = categories.find(cat => cat.id === result.data.category)?.name || result.data.category || 'default';
+            console.log('📋 Category for template:', categoryName);
+
+            const protocolData = generateProtocolFromTemplate(
+              result.data.name,
+              categoryName
+            );
+            await addProtocol({
+              ...protocolData,
+              product_id: result.data.id
+            });
+            console.log('✅ Protocol generated for edited product');
+            alert('Product updated AND Protocol generated successfully!');
+          } catch (protocolError) {
+            console.error('❌ Protocol Generation Error:', protocolError);
+            alert(`Product updated, but protocol generation failed.`);
+          }
+        } else {
+          alert('Product updated successfully!');
+        }
       } else {
         // Remove non-creatable fields for new products
         const { variations, ...createData } = formData as any;
@@ -309,6 +341,37 @@ const AdminDashboard: React.FC = () => {
           throw new Error(result.error);
         }
         console.log('✅ Product created successfully');
+
+        // Template-based Protocol Generation (FREE - No AI needed)
+        if (autoGenerateProtocol) {
+          try {
+            console.log('📋 Generating protocol from template...');
+
+            // Convert category ID to display name for template matching
+            const categoryName = categories.find(cat => cat.id === dbPayload.category)?.name || dbPayload.category || 'default';
+            console.log('📋 Category for template:', categoryName);
+
+            const protocolData = generateProtocolFromTemplate(
+              dbPayload.name!,
+              categoryName
+            );
+
+            console.log('✅ Protocol generated from template:', protocolData);
+
+            if (result.data) {
+              await addProtocol({
+                ...protocolData,
+                product_id: result.data.id
+              });
+              alert('Product saved AND Protocol auto-generated successfully!');
+            }
+          } catch (protocolError) {
+            console.error('❌ Protocol Generation Error:', protocolError);
+            alert(`Product saved, but protocol generation failed: ${protocolError instanceof Error ? protocolError.message : 'Unknown error'}`);
+          }
+        } else {
+          alert('Product saved successfully!');
+        }
       }
 
       // Refresh products to ensure UI is updated
@@ -372,6 +435,44 @@ const AdminDashboard: React.FC = () => {
     setTimeout(() => setIsRefreshing(false), 500);
   };
 
+  const handleBulkGenerateProtocols = async () => {
+    if (!confirm(`This will generate/regenerate protocols for ALL ${products.length} products using AI. This may take a while and will consume API credits. Continue?`)) {
+      return;
+    }
+
+    try {
+      setIsProcessing(true);
+      let successCount = 0;
+      let errorCount = 0;
+
+      for (const product of products) {
+        try {
+          console.log(`📋 Generating protocol for: ${product.name}`);
+          // Convert category ID to display name for template matching
+          const categoryName = categories.find(cat => cat.id === product.category)?.name || product.category || 'default';
+          const protocolData = generateProtocolFromTemplate(product.name, categoryName);
+          await addProtocol({
+            ...protocolData,
+            product_id: product.id
+          });
+          successCount++;
+          console.log(`✅ Protocol created for: ${product.name}`);
+        } catch (err) {
+          console.error(`❌ Failed to generate protocol for ${product.name}:`, err);
+          errorCount++;
+        }
+      }
+
+      alert(`Bulk Generation Complete:\n✅ Generated: ${successCount}\n❌ Failed: ${errorCount}`);
+
+    } catch (error) {
+      console.error('Bulk generation error:', error);
+      alert('Bulk generation failed.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   // Login Screen
   if (!isAuthenticated) {
     return (
@@ -380,8 +481,8 @@ const AdminDashboard: React.FC = () => {
           <div className="text-center mb-6">
             <div className="mx-auto mb-4">
               <img
-                src="/btb-logo.png"
-                alt="Better Than Bare"
+                src="/glow-logo.jpg"
+                alt="Glow with Joo"
                 className="h-14 w-auto mx-auto object-contain"
               />
             </div>
@@ -593,6 +694,28 @@ const AdminDashboard: React.FC = () => {
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-black placeholder-gray-400"
                       placeholder="e.g., GEPPPGKPADDAGLV"
                     />
+                  </div>
+
+                  {/* Auto-Generate Protocol Checkbox */}
+                  <div className="md:col-span-2 mt-2 bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-lg border border-purple-200">
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={autoGenerateProtocol}
+                        onChange={(e) => setAutoGenerateProtocol(e.target.checked)}
+                        className="w-5 h-5 text-purple-600 rounded focus:ring-purple-500"
+                      />
+                      <div>
+                        <span className="font-bold text-gray-800 flex items-center gap-2">
+                          📋 {editingProduct ? 'Generate/Update Protocol' : 'Auto-Generate Protocol'}
+                        </span>
+                        <p className="text-xs text-gray-600">
+                          {editingProduct
+                            ? 'Create or update the dosage protocol for this product.'
+                            : 'Automatically create a dosage protocol based on the product category.'}
+                        </p>
+                      </div>
+                    </label>
                   </div>
                 </div>
               </div>
@@ -1147,6 +1270,26 @@ const AdminDashboard: React.FC = () => {
   if (currentView === 'protocols') {
     return (
       <div className="min-h-screen bg-gray-50">
+        {/* Bulk Generate Banner */}
+        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4">
+          <div className="max-w-4xl mx-auto flex items-center justify-between flex-wrap gap-4">
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-5 h-5 text-purple-200" />
+              <div>
+                <h3 className="font-bold text-white">AI Protocol Assistant</h3>
+                <p className="text-xs text-purple-200">Generate protocols for all {products.length} products</p>
+              </div>
+            </div>
+            <button
+              onClick={handleBulkGenerateProtocols}
+              disabled={isProcessing}
+              className="bg-white text-purple-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-purple-50 transition-colors disabled:opacity-50"
+            >
+              {isProcessing ? 'Generating...' : '🤖 Bulk Generate All Protocols'}
+            </button>
+          </div>
+        </div>
+
         <ProtocolManager onBack={() => setCurrentView('dashboard')} />
       </div>
     );
@@ -1237,8 +1380,8 @@ const AdminDashboard: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <div className="h-10 flex items-center">
                   <img
-                    src="/btb-logo.png"
-                    alt="Better Than Bare"
+                    src="/glow-logo.jpg"
+                    alt="Glow with Joo"
                     className="h-10 w-auto object-contain"
                   />
                 </div>

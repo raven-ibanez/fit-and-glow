@@ -12,6 +12,7 @@ export interface Protocol {
     storage: string;
     sort_order: number;
     active: boolean;
+    product_id?: string;
     created_at: string;
     updated_at: string;
 }

@@ -19,7 +19,8 @@ const ProtocolGuide: React.FC = () => {
     };
 
     // Filter only active protocols
-    const activeProtocols = protocols.filter(p => p.active);
+    // const activeProtocols = protocols.filter(p => p.active);
+    const activeProtocols: any[] = []; // Forced empty as per user request
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#FADADD] via-[#FDF5F7] to-white">

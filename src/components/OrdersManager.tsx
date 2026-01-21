@@ -106,7 +106,13 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
             .eq('id', item.variation_id)
             .single();
 
-          if (varError) throw varError;
+          if (varError) {
+            if (varError.code === 'PGRST116') {
+              throw new Error(`Variation "${item.variation_name}" not found. It may have been deleted.`);
+            }
+            throw varError;
+          }
+
           if (!variation || variation.stock_quantity < item.quantity) {
             alert(`Insufficient stock for ${item.product_name} ${item.variation_name || ''}. Available: ${variation?.stock_quantity || 0}, Required: ${item.quantity}`);
             return;
@@ -119,7 +125,12 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
             .eq('id', item.product_id)
             .single();
 
-          if (prodError) throw prodError;
+          if (prodError) {
+            if (prodError.code === 'PGRST116') {
+              throw new Error(`Product "${item.product_name}" not found. It may have been deleted.`);
+            }
+            throw prodError;
+          }
           if (!product || product.stock_quantity < item.quantity) {
             alert(`Insufficient stock for ${item.product_name}. Available: ${product?.stock_quantity || 0}, Required: ${item.quantity}`);
             return;
@@ -191,9 +202,10 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
 
       alert(`Order confirmed! Stock has been deducted from inventory.`);
       setSelectedOrder(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error confirming order:', error);
-      alert(`Failed to confirm order: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      const errorMessage = error instanceof Error ? error.message : error?.message || 'Unknown error';
+      alert(`Failed to confirm order: ${errorMessage}`);
     } finally {
       setIsProcessing(false);
     }

@@ -69,8 +69,9 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
     // Check if cart contains Tirzepatide (free shipping)
     const hasTirzepatide = cartItems.some(item => item.product.name === 'Tirzepatide');
 
-    // Calculate shipping fee (Free if Tirzepatide, else flat 150)
-    const shippingFee = hasTirzepatide ? 0 : 150;
+    // Calculate shipping fee (Free if Tirzepatide, else based on location)
+    const selectedLocation = shippingLocations.find(loc => loc.id === shippingLocation);
+    const shippingFee = hasTirzepatide ? 0 : (selectedLocation ? selectedLocation.fee : 0);
 
     // Calculate final total (Subtotal + Shipping - Discount)
     const finalTotal = Math.max(0, totalPrice + shippingFee - discountAmount);

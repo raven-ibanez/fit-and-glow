@@ -5,18 +5,18 @@
 @tailwind utilities;
 
 :root {
-  /* Better Than Bare - Soft Pink Luxury Theme */
-  --theme-bg: #FAFAFB;
-  --theme-text: #3D3D3D;
+  /* Fit and Glow - Green Health Theme */
+  --theme-bg: #FFFFFF;
+  --theme-text: #2C3E50;
 
   /* Primary Palette */
-  --blush-pink: #F8C8D8;
-  --dusty-rose: #E8A4B8;
-  --soft-pink: #FADADD;
+  --brand-green: #16A34A;
+  --light-green: #DCFCE7;
+  --soft-green: #F0FDF4;
 
   /* Backgrounds */
-  --cream: #FFFCFA;
-  --blush-light: #FDF5F7;
+  --cream: #FFFFFF;
+  --blush-light: #F0FDF4;
   --warm-white: #FFFFFF;
 }
 
@@ -39,11 +39,11 @@
 
   /* Better Than Bare Button Styles */
   .btn-primary {
-    @apply bg-blush-500 text-white px-8 py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 shadow-soft hover:bg-blush-600 hover:shadow-luxury active:transform active:scale-[0.98];
+    @apply bg-blush-600 text-white px-8 py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 shadow-md hover:bg-blush-700 hover:shadow-lg active:transform active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply bg-transparent text-rose-500 border-2 border-rose-400 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-rose-50 hover:border-rose-500 active:transform active:scale-[0.98];
+    @apply bg-transparent text-blush-600 border-2 border-blush-500 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-blush-50 hover:border-blush-600 active:transform active:scale-[0.98];
   }
 
   /* Luxury Card Styles */

@@ -7,23 +7,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Glow with Joo - Purple Theme
+        // Fit and Glow - Green Theme
         'theme-bg': '#FFFFFF',           // Pure White
-        'theme-text': '#4A4A4A',         // Soft Charcoal
+        'theme-text': '#2C3E50',         // Dark Slate for better contrast with green
 
-        // Primary - Glow Purple
+        // Primary - Fit and Glow Green
         'blush': {
-          DEFAULT: '#7A28CB', // Main Purple
-          50: '#F5F3FF',
-          100: '#EDE9FE',
-          200: '#DDD6FE',
-          300: '#C4B5FD',
-          400: '#A78BFA',
-          500: '#8B5CF6',
-          600: '#7A28CB', // Primary Brand Color
-          700: '#6D28D9',
-          800: '#5B21B6',
-          900: '#4C1D95',
+          DEFAULT: '#16A34A', // Vibrant Green
+          50: '#F0FDF4',
+          100: '#DCFCE7',
+          200: '#BBF7D0',
+          300: '#86EFAC',
+          400: '#4ADE80',
+          500: '#22C55E',
+          600: '#16A34A', // Primary Brand Color
+          700: '#15803D',
+          800: '#166534',
+          900: '#14532D',
         },
 
         // Accent - Glow Teal

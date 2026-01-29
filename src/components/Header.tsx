@@ -22,11 +22,11 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
             >
               <img
                 src="/glow-logo.jpg"
-                alt="Glow with Joo"
+                alt="Fit and Glow"
                 className="h-10 sm:h-12 w-auto object-contain rounded-lg"
               />
               <span className="ml-3 text-lg sm:text-xl font-heading font-bold text-blush-600 tracking-tight">
-                Glow with Joo
+                Fit and Glow
               </span>
             </button>
 
@@ -120,16 +120,16 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               <div className="flex items-center gap-3">
                 <img
                   src="/glow-logo.jpg"
-                  alt="Glow with Joo"
+                  alt="Fit and Glow"
                   className="h-8 w-auto object-contain rounded-md"
                 />
                 <span className="text-lg font-heading font-bold text-blush-600">
-                  Glow with Joo
+                  Fit and Glow
                 </span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 text-charcoal-500 hover:text-rose-500 transition-colors rounded-lg hover:bg-blush-50"
+                className="p-2 text-charcoal-500 hover:text-red-500 transition-colors rounded-lg hover:bg-blush-50"
               >
                 <X className="w-5 h-5" />
               </button>

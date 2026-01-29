@@ -16,14 +16,14 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
     <div className="relative min-h-[90vh] overflow-hidden grain-overlay flex items-center justify-center">
 
       {/* Modern Gradient Background - Refined */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#F5E6FA] to-[#EDE9FE]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#F0FDF4] to-[#DCFCE7]" />
 
       {/* Abstract Shapes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Top Right Blob */}
         <div
           className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] rounded-full blur-3xl opacity-30 animate-pulse"
-          style={{ background: 'radial-gradient(circle, #C4B5FD 0%, transparent 70%)', animationDuration: '8s' }}
+          style={{ background: 'radial-gradient(circle, #BBF7D0 0%, transparent 70%)', animationDuration: '8s' }}
         />
         {/* Bottom Left Blob */}
         <div
@@ -52,7 +52,7 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
           <div className="mb-8 md:mb-10">
             <img
               src="/glow-logo.jpg"
-              alt="Glow with Joo"
+              alt="Fit and Glow"
               className="h-24 md:h-32 w-auto mx-auto object-contain drop-shadow-md rounded-xl"
             />
           </div>

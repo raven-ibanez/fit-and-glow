@@ -382,7 +382,7 @@ Please confirm this order. Thank you!
         const contactUrl = contactMethod === 'viber'
             ? `viber://chat?number=%2B639989747336`
             : contactMethod === 'messenger'
-                ? `https://www.facebook.com/messages/t/61580465201142`
+                ? `https://m.me/61580465201142`
                 : null;
 
         if (contactUrl) {

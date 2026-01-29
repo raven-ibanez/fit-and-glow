@@ -92,7 +92,7 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
               <div className="absolute inset-0 bg-white/40 backdrop-blur-2xl rounded-[3rem] border border-white shadow- luxury shadow-blush-600/5 rotate-3 scale-105" />
               <div className="absolute inset-0 bg-white/70 backdrop-blur-md rounded-[3rem] border border-white shadow-luxury -rotate-3 transition-transform hover:rotate-0 duration-700 overflow-hidden flex items-center justify-center p-12">
                 <img
-                  src="public/logoo.png"
+                  src="/logoo.png"
                   alt="Fit and Glow"
                   className="w-full h-auto object-contain drop-shadow-2xl rounded-2xl transform hover:scale-110 transition-transform duration-500"
                 />

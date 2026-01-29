@@ -16,12 +16,12 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center md:items-start lg:col-span-1">
             <div className="flex items-center gap-4 mb-8">
               <img
-                src="/glow-logo.jpg"
+                src="/logoo.png"
                 alt="Fit and Glow"
                 className="h-14 w-auto object-contain bg-white rounded-2xl p-2 shadow-glow"
               />
               <span className="text-2xl font-heading font-black text-white tracking-tight">
-                Fit & <span className="text-blush-500">Glow</span>
+                Fit N <span className="text-blush-500">Glow</span>
               </span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm text-center md:text-left font-medium opacity-80">
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
         {/* Global Footer Terminal */}
         <div className="pt-12 border-t border-slate-800/60 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest text-center md:text-left">
-            © {currentYear} Fit and Glow. Engineered for Excellence.
+            © {currentYear} Fit N Glow. Engineered for Excellence.
           </p>
           <div className="flex items-center gap-2 text-[11px] font-black text-blush-600 uppercase tracking-[0.2em] animate-pulse">
             <span className="w-2 h-2 rounded-full bg-blush-600" />

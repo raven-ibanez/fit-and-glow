@@ -23,13 +23,13 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               <div className="relative">
                 <div className="absolute inset-0 bg-blush-400 blur-lg opacity-20 group-hover:opacity-40 transition-opacity rounded-full"></div>
                 <img
-                  src="/glow-logo.jpg"
+                  src="/logoo.png"
                   alt="Fit and Glow"
                   className="h-10 sm:h-12 w-auto object-contain rounded-xl relative z-10 border border-white/60 shadow-sm"
                 />
               </div>
               <span className="ml-4 text-xl sm:text-2xl font-heading font-bold text-slate-900 tracking-tight">
-                Fit & <span className="text-blush-600">Glow</span>
+                Fit N <span className="text-blush-600">Glow</span>
               </span>
             </button>
 
@@ -114,12 +114,12 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
             <div className="flex items-center justify-between p-6 border-b border-blush-100/50">
               <div className="flex items-center gap-4">
                 <img
-                  src="/glow-logo.jpg"
+                  src="/logoo.png"
                   alt="Fit and Glow"
                   className="h-10 w-auto object-contain rounded-xl shadow-sm border border-white/60"
                 />
                 <span className="text-xl font-heading font-bold text-slate-900">
-                  Fit & <span className="text-blush-600">Glow</span>
+                  Fit N <span className="text-blush-600">Glow</span>
                 </span>
               </div>
               <button

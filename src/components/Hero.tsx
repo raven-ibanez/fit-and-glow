@@ -16,7 +16,7 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
     <div className="relative min-h-[95vh] overflow-hidden flex items-center justify-center pt-20">
       {/* Dynamic Background System */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,#ECFDF5_0%,#FFFFFF_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,#F0F9F4_0%,#FFFFFF_100%)]" />
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] pointer-events-none" />
       </div>
 
@@ -56,7 +56,7 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">
               Evolve Your <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blush-600 to-emerald-500">Essential Glow.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blush-600 to-glow-teal-400">Essential Glow.</span>
             </h1>
 
             <p className="text-lg md:text-xl text-slate-600 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
@@ -92,7 +92,7 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
               <div className="absolute inset-0 bg-white/40 backdrop-blur-2xl rounded-[3rem] border border-white shadow- luxury shadow-blush-600/5 rotate-3 scale-105" />
               <div className="absolute inset-0 bg-white/70 backdrop-blur-md rounded-[3rem] border border-white shadow-luxury -rotate-3 transition-transform hover:rotate-0 duration-700 overflow-hidden flex items-center justify-center p-12">
                 <img
-                  src="/glow-logo.jpg"
+                  src="public/logoo.png"
                   alt="Fit and Glow"
                   className="w-full h-auto object-contain drop-shadow-2xl rounded-2xl transform hover:scale-110 transition-transform duration-500"
                 />

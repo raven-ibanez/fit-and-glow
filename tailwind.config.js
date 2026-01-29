@@ -8,37 +8,37 @@ export default {
     extend: {
       colors: {
         // Fit and Glow - Green Theme
-        'theme-bg': '#FFFFFF',           // Pure White
-        'theme-text': '#2C3E50',         // Dark Slate for better contrast with green
+        'theme-bg': '#FFFFFF',
+        'theme-text': '#2C3E50',
 
-        // Primary - Fit and Glow Green (Refined Organic Green)
+        // Primary - Fit and Glow Forest Green (from logo)
         'blush': {
-          DEFAULT: '#059669', // Emerald/Forest Blend
-          50: '#ECFDF5',
-          100: '#D1FAE5',
-          200: '#A7F3D0',
-          300: '#6EE7B7',
-          400: '#34D399',
-          500: '#10B981',
-          600: '#059669', // Organic Brand Primary
-          700: '#047857',
-          800: '#065F46',
-          900: '#064E3B',
+          DEFAULT: '#00703C',
+          50: '#F0F9F4',
+          100: '#E1F3E9',
+          200: '#C2E7D3',
+          300: '#85D0A7',
+          400: '#48B97B',
+          500: '#1BA05F',
+          600: '#00703C', // Logo Forest Green
+          700: '#005A30',
+          800: '#004525',
+          900: '#00301A',
         },
 
-        // Accent - Glow Teal
+        // Secondary/Accent - Fit and Glow Lime Green
         'glow-teal': {
-          DEFAULT: '#1ABC9C',
-          50: '#F0FDFA',
-          100: '#CCFBF1',
-          200: '#99F6E4',
-          300: '#5EEAD4',
-          400: '#2DD4BF',
-          500: '#14B8A6',
-          600: '#0D9488',
-          700: '#0F766E',
-          800: '#115E59',
-          900: '#134E4A',
+          DEFAULT: '#39B54A',
+          50: '#F5FCF6',
+          100: '#EBFAF0',
+          200: '#D7F5E1',
+          300: '#AFF0C2',
+          400: '#39B54A', // Logo Lime Green
+          500: '#2E923B',
+          600: '#23702D',
+          700: '#184D1F',
+          800: '#0D2B11',
+          900: '#030803',
         },
 
         // Secondary - Soft Gold/Accent

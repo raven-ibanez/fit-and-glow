@@ -79,7 +79,7 @@ Your products are organized as:
 
 ### Option 2: Via Admin Panel
 1. Go to `/admin`
-2. Login (password: `Peptivate@Admin!2025`)
+2. Login (password: `fitandglow@Admin!2025`)
 3. Click **Manage Products**
 4. Click **Edit** on any product
 5. Scroll to "Product Image" section

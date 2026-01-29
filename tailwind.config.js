@@ -11,19 +11,19 @@ export default {
         'theme-bg': '#FFFFFF',           // Pure White
         'theme-text': '#2C3E50',         // Dark Slate for better contrast with green
 
-        // Primary - Fit and Glow Green
+        // Primary - Fit and Glow Green (Refined Organic Green)
         'blush': {
-          DEFAULT: '#16A34A', // Vibrant Green
-          50: '#F0FDF4',
-          100: '#DCFCE7',
-          200: '#BBF7D0',
-          300: '#86EFAC',
-          400: '#4ADE80',
-          500: '#22C55E',
-          600: '#16A34A', // Primary Brand Color
-          700: '#15803D',
-          800: '#166534',
-          900: '#14532D',
+          DEFAULT: '#059669', // Emerald/Forest Blend
+          50: '#ECFDF5',
+          100: '#D1FAE5',
+          200: '#A7F3D0',
+          300: '#6EE7B7',
+          400: '#34D399',
+          500: '#10B981',
+          600: '#059669', // Organic Brand Primary
+          700: '#047857',
+          800: '#065F46',
+          900: '#064E3B',
         },
 
         // Accent - Glow Teal
@@ -86,8 +86,10 @@ export default {
         'DEFAULT': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
         'md': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
         'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02)',
-        'soft': '0 2px 8px rgba(248, 200, 216, 0.15), 0 4px 16px rgba(248, 200, 216, 0.1)',
-        'luxury': '0 4px 20px rgba(232, 164, 184, 0.15)',
+        'soft': '0 2px 20px rgba(5, 150, 105, 0.06)',
+        'luxury': '0 10px 40px rgba(5, 150, 105, 0.1)',
+        'glow': '0 0 20px rgba(16, 185, 129, 0.15)',
+        'uplift': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
       },
       borderRadius: {
         'none': '0',

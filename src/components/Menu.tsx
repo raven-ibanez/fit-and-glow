@@ -3,7 +3,7 @@ import MenuItemCard from './MenuItemCard';
 import Hero from './Hero';
 import ProductDetailModal from './ProductDetailModal';
 import type { Product, ProductVariation, CartItem, PenType } from '../types';
-import { Search, Filter, Package } from 'lucide-react';
+import { Search, Filter, Package, Plus } from 'lucide-react';
 
 interface MenuProps {
   menuItems: Product[];
@@ -68,76 +68,91 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
         />
       )}
 
-      <div className="min-h-screen bg-theme-bg">
+      <div className="min-h-screen bg-white">
         <Hero
           onShopAll={() => {
             productsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }}
         />
 
-        <div className="container mx-auto px-4 py-12" ref={productsRef}>
-          {/* Search and Filter Controls */}
-          <div className="mb-10 flex flex-col sm:flex-row gap-4">
-            {/* Search Bar */}
-            <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search catalog..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="input-field pl-12"
-              />
+        <div className="container mx-auto px-4 md:px-8 py-24" ref={productsRef}>
+          {/* Header & Controls Section */}
+          <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-16">
+            <div className="max-w-xl text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blush-50 text-blush-600 border border-blush-100 text-[10px] font-black uppercase tracking-widest mb-4">
+                <Package className="w-3 h-3" />
+                Laboratory Grade
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-black text-slate-900 mb-4 tracking-tight">
+                Premium Catalog
+              </h2>
+              <p className="text-slate-500 font-medium leading-relaxed">
+                Explore our curated collection of high-purity peptides and medical research supplies.
+              </p>
             </div>
 
-            {/* Sort Dropdown */}
-            <div className="flex items-center gap-3 sm:w-auto bg-white rounded-lg px-4 py-3 border border-gray-200">
-              <Filter className="text-gray-400 w-5 h-5" />
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as 'name' | 'price' | 'purity')}
-                className="focus:outline-none bg-transparent font-medium text-gray-700 text-sm"
-              >
-                <option value="name">Sort by Name</option>
-                <option value="price">Sort by Price</option>
-                <option value="purity">Sort by Purity</option>
-              </select>
-            </div>
-          </div>
+            <div className="w-full lg:w-auto flex flex-col sm:flex-row items-center gap-4">
+              <div className="relative w-full sm:w-[320px] group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-blush-600 transition-colors" />
+                <input
+                  type="text"
+                  placeholder="Find your formula..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blush-500/10 focus:border-blush-500 transition-all font-medium text-slate-800 placeholder-slate-400"
+                />
+              </div>
 
-          {/* Results Count */}
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-xl font-heading font-bold text-science-blue-900">Product Catalog</h2>
-            <span className="text-sm font-medium text-gray-500 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
-              {sortedProducts.length} Results
-            </span>
-          </div>
-
-          {/* Products Grid */}
-          {sortedProducts.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="bg-white rounded-lg shadow-sm p-12 max-w-md mx-auto border border-gray-100">
-                <div className="bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Package className="w-10 h-10 text-gray-300" />
+              <div className="relative w-full sm:w-auto">
+                <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as 'name' | 'price' | 'purity')}
+                  className="w-full sm:w-auto pl-12 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:border-blush-500 transition-all font-bold text-xs text-slate-700 appearance-none cursor-pointer hover:bg-slate-50 shadow-sm uppercase tracking-widest"
+                >
+                  <option value="name">Sort: Name</option>
+                  <option value="price">Sort: Price</option>
+                  <option value="purity">Sort: Purity</option>
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                  <Plus className="w-3 h-3 rotate-45" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">No products found</h3>
-                <p className="text-gray-500 mb-6">
-                  {searchQuery
-                    ? `No products match "${searchQuery}".`
-                    : 'No products available.'}
-                </p>
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="text-science-blue-600 font-semibold hover:underline"
-                  >
-                    Clear Search
-                  </button>
-                )}
               </div>
             </div>
+          </div>
+
+          {/* Results Analysis */}
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-[1px] flex-1 bg-slate-100" />
+            <span className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">
+              Showing {sortedProducts.length} Compounds
+            </span>
+            <div className="h-[1px] flex-1 bg-slate-100" />
+          </div>
+
+          {/* Products Visualization */}
+          {sortedProducts.length === 0 ? (
+            <div className="text-center py-32 rounded-[3rem] bg-slate-50 border border-dashed border-slate-200">
+              <div className="bg-white w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 shadow-soft">
+                <Package className="w-10 h-10 text-slate-200" />
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 mb-2 tracking-tight">No Compounds Found</h3>
+              <p className="text-slate-500 font-medium mb-8 max-w-xs mx-auto">
+                {searchQuery
+                  ? `We couldn't find any results for "${searchQuery}". Try a different term?`
+                  : 'Our catalog is currently being updated. Please check back soon!'}
+              </p>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="text-blush-600 font-black text-xs uppercase tracking-widest hover:text-blush-700 active:scale-95 transition-all"
+                >
+                  Reset Research
+                </button>
+              )}
+            </div>
           ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
               {sortedProducts.map((product) => (
                 <MenuItemCard
                   key={product.id}

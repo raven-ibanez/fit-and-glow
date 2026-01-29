@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Sparkles, Shield, FlaskConical, Award } from 'lucide-react';
+import { ArrowRight, Sparkles, Shield, FlaskConical } from 'lucide-react';
 
 interface HeroProps {
   onShopAll: () => void;
@@ -13,102 +13,119 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
   }, []);
 
   return (
-    <div className="relative min-h-[90vh] overflow-hidden grain-overlay flex items-center justify-center">
-
-      {/* Modern Gradient Background - Refined */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#F0FDF4] to-[#DCFCE7]" />
-
-      {/* Abstract Shapes */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Top Right Blob */}
-        <div
-          className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] rounded-full blur-3xl opacity-30 animate-pulse"
-          style={{ background: 'radial-gradient(circle, #BBF7D0 0%, transparent 70%)', animationDuration: '8s' }}
-        />
-        {/* Bottom Left Blob */}
-        <div
-          className="absolute -bottom-[10%] -left-[10%] w-[600px] h-[600px] rounded-full blur-3xl opacity-20 animate-pulse"
-          style={{ background: 'radial-gradient(circle, #1ABC9C 0%, transparent 70%)', animationDuration: '10s' }}
-        />
+    <div className="relative min-h-[95vh] overflow-hidden flex items-center justify-center pt-20">
+      {/* Dynamic Background System */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,#ECFDF5_0%,#FFFFFF_100%)]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] pointer-events-none" />
       </div>
 
-      {/* Main Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 flex flex-col items-center">
+      {/* Animated Decorative Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+        <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-blush-100/30 rounded-full blur-[120px] animate-float opacity-60" />
+        <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] bg-blush-200/20 rounded-full blur-[100px] animate-float opacity-40" style={{ animationDelay: '-3s' }} />
 
-        {/* Glass Card Container for Content Consistency */}
-        <div className={`
-          relative backdrop-blur-md bg-white/40 border border-white/60 rounded-[2rem] shadow-xl 
-          p-8 md:p-12 lg:p-16 max-w-4xl w-full text-center
-          transition-all duration-1000 ease-out transform
-          ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}
-        `}>
+        {/* Floating "Cells" - Decorative */}
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute bg-white/40 border border-white/60 backdrop-blur-sm rounded-full shadow-soft animate-float"
+            style={{
+              width: `${Math.random() * 40 + 20}px`,
+              height: `${Math.random() * 40 + 20}px`,
+              left: `${Math.random() * 90 + 5}%`,
+              top: `${Math.random() * 90 + 5}%`,
+              animationDuration: `${Math.random() * 4 + 6}s`,
+              animationDelay: `${Math.random() * -5}s`,
+              opacity: 0.5
+            }}
+          />
+        ))}
+      </div>
 
-          {/* Decorative Sparkle */}
-          <div className="absolute -top-6 -right-6 hidden md:block animate-bounce" style={{ animationDuration: '3s' }}>
-            <Sparkles className="w-12 h-12 text-blush-400 opacity-80" />
-          </div>
+      {/* Hero Content */}
+      <div className="relative z-10 container mx-auto px-4 md:px-8">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 
-          {/* Logo Brand */}
-          <div className="mb-8 md:mb-10">
-            <img
-              src="/glow-logo.jpg"
-              alt="Fit and Glow"
-              className="h-24 md:h-32 w-auto mx-auto object-contain drop-shadow-md rounded-xl"
-            />
-          </div>
-
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-white shadow-sm mb-6">
-            <FlaskConical className="w-3.5 h-3.5 text-blush-600" />
-            <span className="text-xs font-bold text-charcoal-600 tracking-widest uppercase">Premium Grade • Lab Tested</span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-charcoal-900 mb-6 leading-tight tracking-tight drop-shadow-sm">
-            Reject Average. <br className="hidden md:block" />
-            <span className="text-blush-600">
-              Reveal Your Radiance.
-            </span>
-          </h1>
-
-          {/* Subheading */}
-          <p className="text-lg md:text-xl text-charcoal-600 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-            Elevate your wellness with premium, high-purity peptides designed for results you can see and feel.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-            <button
-              onClick={onShopAll}
-              className="w-full sm:w-auto min-w-[200px] px-8 py-4 bg-blush-600 hover:bg-blush-700 text-white font-semibold rounded-full shadow-lg hover:shadow-blush-300/50 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
-            >
-              Start Your Journey
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-
-
-          </div>
-
-        </div>
-
-        {/* Trust Indicators - Floating Below */}
-        <div className={`
-          mt-12 flex flex-wrap justify-center gap-4 md:gap-8 
-          transition-all duration-1000 delay-300 ease-out
-          ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
-        `}>
-          {[
-            { icon: Shield, label: '99% Purity Guaranteed' },
-            { icon: FlaskConical, label: 'Third-Party Lab Tested' },
-            { icon: Award, label: 'Premium Grade Source' },
-          ].map((item, idx) => (
-            <div key={idx} className="flex items-center gap-2 px-5 py-2.5 bg-white/60 backdrop-blur-sm rounded-full border border-white/40 shadow-sm text-sm font-medium text-charcoal-600">
-              <item.icon className="w-4 h-4 text-blush-500" />
-              {item.label}
+          {/* Left Side: Content Box */}
+          <div className={`flex-1 text-center lg:text-left transition-all duration-1000 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blush-50 border border-blush-100 shadow-sm mb-8 animate-fadeIn">
+              <Sparkles className="w-4 h-4 text-blush-600" />
+              <span className="text-[11px] font-bold text-blush-800 uppercase tracking-widest">The Science of Radiance</span>
             </div>
-          ))}
-        </div>
 
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">
+              Evolve Your <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blush-600 to-emerald-500">Essential Glow.</span>
+            </h1>
+
+            <p className="text-lg md:text-xl text-slate-600 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Experience medical-grade purity. Our premium peptides are meticulously lab-tested to unlock your peak wellness and natural vitality.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
+              <button
+                onClick={onShopAll}
+                className="btn-primary flex items-center group w-full sm:w-auto"
+              >
+                Explore Collection
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <div className="flex items-center gap-4 text-slate-500 text-sm font-medium">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-slate-100 overflow-hidden shadow-sm">
+                      <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="user" className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+                <span>Trusted by 2k+ Researchers</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side: Hero Visual */}
+          <div className={`flex-1 relative w-full max-w-[600px] transition-all duration-1000 delay-300 ease-out transform ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'}`}>
+            <div className="relative aspect-square">
+              {/* Glass Card for Logo Surround */}
+              <div className="absolute inset-0 bg-white/40 backdrop-blur-2xl rounded-[3rem] border border-white shadow- luxury shadow-blush-600/5 rotate-3 scale-105" />
+              <div className="absolute inset-0 bg-white/70 backdrop-blur-md rounded-[3rem] border border-white shadow-luxury -rotate-3 transition-transform hover:rotate-0 duration-700 overflow-hidden flex items-center justify-center p-12">
+                <img
+                  src="/glow-logo.jpg"
+                  alt="Fit and Glow"
+                  className="w-full h-auto object-contain drop-shadow-2xl rounded-2xl transform hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Floating Feature Badges */}
+              <div className="absolute -top-6 -right-6 lg:-right-12 bg-white p-4 rounded-2xl shadow-uplift border border-slate-100 animate-float" style={{ animationDelay: '-1s' }}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blush-50 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-blush-600" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-slate-400 leading-none mb-1">QUALITY</p>
+                    <p className="text-sm font-bold text-slate-800">99.9% Pure</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute -bottom-6 -left-6 lg:-left-12 bg-white p-4 rounded-2xl shadow-uplift border border-slate-100 animate-float" style={{ animationDelay: '-2.5s' }}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center">
+                    <FlaskConical className="w-5 h-5 text-orange-600" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-slate-400 leading-none mb-1">TRUST</p>
+                    <p className="text-sm font-bold text-slate-800">Lab Tested</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );
